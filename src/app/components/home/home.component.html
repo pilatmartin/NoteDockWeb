@@ -1,2 +1,4 @@
 <p>home works!</p>
 <button mat-raised-button color="primary" (click)="logOut()">Logout</button>
+<h2 *ngFor = 'let folder of folders'>{{folder.name}}</h2>
+<h3 *ngFor = 'let note of notes'>{{note.title}}</h3>
