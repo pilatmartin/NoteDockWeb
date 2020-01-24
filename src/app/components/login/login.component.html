@@ -1,0 +1,33 @@
+
+  <div class="container">
+    <div class="login-box">
+        <div class="header">
+
+            <div class="header-content">
+                <div class="logo"> <img src="../../../images/logo96.png" alt="NoteDock logo" height="96" width="96"></div>
+                <h1>NoteDock</h1>
+                <h4>Welcome!</h4>
+            </div>
+        </div>
+
+        <div class="form">
+            <!-- Login -->
+            <div class="form-fields">
+                <mat-form-field>
+                    <input matInput placeholder="Enter your email" #userName required>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="password" placeholder="Enter your password" #userPassword required >
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" (click)='login(userName.value, userPassword.value)'>Login</button>
+                <br>
+                <button mat-raised-button color="warn" routerLink="/register">Go to Register</button>
+
+                <h5 routerLink="/forgot-password" >Forgot your password?</h5>
+
+            </div>
+        </div>
+    </div>
+</div>
