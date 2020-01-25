@@ -1,0 +1,178 @@
+.container{
+    display: flex;
+
+    .sidenav{
+        width: 300px;
+        height: 100vh;
+        margin: 0;
+        background-color: rgb(31, 30, 30); 
+
+        .user-info{
+            height: 100px;
+            background-color: rgb(44, 43, 43);
+            margin-bottom: -15px;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+
+            .avatar{
+                margin: 20px;
+                height: 70px;
+                width: 70px;
+                background-color: rgb(53, 74, 163);
+                border-radius: 50%;
+            }
+
+            .display-name{
+                color: white;
+                font-weight: 400;
+            }
+        }
+
+        ul{
+            list-style-type: none;
+            list-style-position: inside;
+            list-style: none;
+            color: white;
+            
+            li{
+                list-style-type: none;
+            }
+            
+            .link{
+                padding: 10px 0;
+                margin-left: -40px;
+                padding-left: 10px;
+                height: 20px;
+                line-height: 20px;
+
+
+                &:hover{
+                    background-color: rgb(22, 22, 22)
+                }
+
+                &:focus{
+                    background-color: rgb(22, 22, 22);
+                    outline: none;
+                }
+
+                i{
+                    height: 25px;
+                    line-height: 20px;
+                    vertical-align: middle !important; 
+                    margin-right: 12px;
+                    color: rgb(53, 74, 163);
+                }
+            }
+
+            .folders{
+                height: 10px !important;
+                line-height: 10px !important;
+                margin-left: -45px !important;
+                vertical-align: middle !important; 
+                color: rgb(190, 190, 190);
+            }
+
+            .divider{
+                height: 1px;
+                border-bottom: 1px solid rgb(44, 43, 43);
+                margin-left: -40px;
+            }
+        }
+        .banner{
+            overflow: hidden;
+            width: 300px;
+            position: absolute;
+            bottom: 0px;
+
+            .logo{
+                display: flex;
+                align-items: center;
+                margin-bottom: -40px;
+                margin-left: 30px;
+                img{
+                    position: relative;
+                    margin: 0 10px;
+                    -webkit-transform: rotate(-8deg);
+                    -moz-transform: rotate(-8deg);
+                    -o-transform: rotate(-8deg);
+                    -ms-transform: rotate(-8deg);
+                    transform: rotate(-8deg);
+                    z-index: 10;
+                    }
+        
+                h2{
+                    color: white;
+                    }
+            }
+
+            svg{
+                position: relative;
+                height: 65px; 
+                width: 100%;
+                z-index: 9999;
+                margin-bottom: -3px; 
+                path{
+                    stroke: none; 
+                    fill:rgb(53, 74, 163);
+                }
+            }
+        }
+    }
+    .notes-panel{
+        width: 350px;
+        height: calc(100vh - 2px);
+        background-color: rgb(247, 247, 247);
+        border-width: 1px 1px 1px 0px;
+        border-color: rgb(221, 221, 221);
+        border-style: solid;
+
+        .note{
+            height: 100px;
+            width: 100%;
+            border-bottom: 1px solid rgb(211, 211, 211);
+            background-color: rgb(241, 241, 241);
+
+            &:focus{
+                background-color: rgb(219, 219, 219);
+                outline: 0;
+            }
+
+            .note-side-title{
+                margin: 0;
+                font-size: 20px;
+                font-weight: 500;
+            }
+            .note-side-desc{
+                margin: 0;
+                font-size: 14px;
+            }
+            .note-side-date{
+                margin: 0;
+                font-size: 12px;
+                position: relative;
+                bottom: -40px;
+                text-align: end;
+                margin: 0 5px;
+            }
+        }
+    }
+    .content{
+        height: 100vh;
+        width: calc(100% - 350px - 350px);
+        margin: auto;
+        input[type="text"]{
+            font-size: 40px ;
+            text-align: center ;
+            width: 1000px ;
+        }
+        textarea{
+            height: 80%;
+            width: 100%;
+            font-size: 20px;
+            border: none;
+            outline: none;
+            height: 70vh ;
+        }
+    }
+}

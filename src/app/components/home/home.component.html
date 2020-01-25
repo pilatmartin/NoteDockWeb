@@ -1,4 +1,62 @@
-<p>home works!</p>
-<button mat-raised-button color="primary" (click)="logOut()">Logout</button>
-<h2 *ngFor = 'let folder of folders'>{{folder.name}}</h2>
-<h3 *ngFor = 'let note of notes'>{{note.title}}</h3>
+<div class="container">
+<div class="sidenav">
+    <div class="user-info">
+        <div class="avatar"></div>
+        <div class="user-data">
+            <h5 class="display-name"> {{user.displayName}}</h5>
+            <h5 class="display-name"> {{user.email}} </h5>
+        </div>
+    </div>
+    <ul class="links">
+        <li class="link" id="new-folder-li"><i class="material-icons"> add </i> 
+            New Folder 
+        </li>
+        <li class="divider"></li>
+        <li class="link"> <i class="material-icons"> folder_open </i> 
+            Folders 
+        </li>
+        <li class="folders link" id={{folder.uid}} tabindex="0" (click)="setCurrentFolderId(folder.uid)" *ngFor = 'let folder of folders'>
+                <svg height="30" width="30" style="vertical-align: middle !important; margin-top: -8px;">
+                        <line x1="10" y1="5" x2="10" y2="15" style="stroke:rgb(148, 148, 148);stroke-width:1" />
+                          <line x1="10" y1="15" x2="20" y2="15" style="stroke:rgb(148, 148, 148);stroke-width:1" />
+                      </svg>
+            {{folder.name}}</li>
+            <li class="divider"></li>
+        <li class="link"> <i class="material-icons"> account_box </i> 
+            Account 
+        </li>
+        <li class="link" (click)="logOut()"><i class="material-icons"> exit_to_app </i> 
+           Logout 
+        </li>
+    </ul>
+    <div class="banner"> 
+            <div class="logo">
+                    <img src="../../../assets/images/logo96.png" alt="Logo" height=60px width="60px">
+                    </div>
+            <svg viewBox="0 0 500 150" preserveAspectRatio="none" >
+                    <path d="M-0.84,34.03 C211.34,104.11 409.99,-39.95 501.41,33.05 L512.69,159.38 L0.00,150.00 Z"></path>
+                </svg>
+    </div>
+</div>
+
+<div class="notes-panel">
+    <div class="note" tabindex="0" (click)="showNoteData(note)" *ngFor = 'let note of notes'>
+        <p class="note-side-title">{{note.title}}</p>
+        <p class="note-side-desc">{{note.description}}</p>
+        <p class="note-side-date">{{note.added.toDate().toString().substring(0,15)}}</p>
+     </div>
+</div>
+
+<div class="content">
+        <mat-form-field style="width:100% !important">
+        <input matInput type="text" id="note-title" /><br>
+    </mat-form-field>
+    <mat-form-field style="width:100% !important; height: 80vh !important;">
+        <textarea matInput id="note-description"></textarea>
+    </mat-form-field>
+        <button mat-raised-button color="primary" class="delete-note-btn"  >UPDATE</button>
+        <button mat-raised-button color="warn" class="update-note-btn" >DELETE</button>
+</div>
+
+
+</div>

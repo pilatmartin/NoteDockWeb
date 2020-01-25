@@ -3,7 +3,6 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -76,7 +75,7 @@ export class AuthService {
      setUserData(user){
       let path = "users/" + user.uid;
       const userRef: AngularFirestoreDocument<any> = this.af.doc(path)
-      const data: User = {
+      const data = {
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
