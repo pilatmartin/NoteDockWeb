@@ -8,7 +8,7 @@
         </div>
     </div>
     <ul class="links">
-        <li class="link" id="new-folder-li"><i class="material-icons"> add </i> 
+        <li class="link" id="new-folder-li" (click) = "openFolderDialog()"><i class="material-icons"> add </i> 
             New Folder 
         </li>
         <li class="divider"></li>
@@ -22,7 +22,7 @@
                       </svg>
             {{folder.name}}</li>
             <li class="divider"></li>
-        <li class="link"> <i class="material-icons"> account_box </i> 
+        <li class="link" (click)="openProfileDialog()"> <i class="material-icons"> account_box </i> 
             Account 
         </li>
         <li class="link" (click)="logOut()"><i class="material-icons"> exit_to_app </i> 
@@ -40,22 +40,25 @@
 </div>
 
 <div class="notes-panel">
+    <div class="note-toolbar">
+        <button mat-button color="primary" class="add-note-btn" (click)="addNote()"  *ngIf = "showNoteBtn" ><i class="material-icons"> add </i> </button>
+    </div>
     <div class="note" tabindex="0" (click)="showNoteData(note)" *ngFor = 'let note of notes'>
-        <p class="note-side-title">{{note.title}}</p>
-        <p class="note-side-desc">{{note.description}}</p>
-        <p class="note-side-date">{{note.added.toDate().toString().substring(0,15)}}</p>
+        <p class="note-side-title">{{note.title.length > 25 ? note.title.substring(0,25) + "..." : note.title}}</p>
+        <p class="note-side-desc">{{note.description.length > 50 ? note.description.substring(0,50)+"..." : note.description}}</p>
+        <p class="note-side-date">{{note.updated}}</p>
      </div>
 </div>
 
-<div class="content">
+<div class="content" *ngIf="showContent">
         <mat-form-field style="width:100% !important">
-        <input matInput type="text" id="note-title" /><br>
+        <input matInput type="text" id="note-title" #noteTitle /><br>
     </mat-form-field>
     <mat-form-field style="width:100% !important; height: 80vh !important;">
-        <textarea matInput id="note-description"></textarea>
+        <textarea matInput id="note-description" #noteDescription></textarea>
     </mat-form-field>
-        <button mat-raised-button color="primary" class="delete-note-btn"  >UPDATE</button>
-        <button mat-raised-button color="warn" class="update-note-btn" >DELETE</button>
+        <button mat-raised-button color="primary" class="delete-note-btn" (click) = "updateNote(noteTitle.value, noteDescription.value)"  >UPDATE</button>
+        <button mat-raised-button color="warn" class="update-note-btn" (click) = "deleteNote()" >DELETE</button>
 </div>
 
 

@@ -19,9 +19,9 @@
                     <input matInput type="password" placeholder="Enter your password" #userPassword required>
                 </mat-form-field>
 
-                <button mat-raised-button color="primary" (click)='signUp(userEmail.value, userPassword.value)'>Register</button>
+                <button mat-raised-button color="primary" (click)='register(userEmail.value, userPassword.value)'>Register</button>
                 <br>
-                <button mat-raised-button color="warn" routerLink = "">Go to Login</button>
+                <button mat-raised-button color="warn" routerLink = "/login">Go to Login</button>
 
 
 

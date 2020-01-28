@@ -8,6 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
+import { AddFolderComponent } from './dialogs/add-folder/add-folder.component';
+import { ProfileComponent } from './dialogs/profile/profile.component';
+import { MainComponent } from './components/main/main.component'
 
 //FIREBASE
 import { AngularFireModule } from '@angular/fire'
@@ -21,7 +24,7 @@ import { AppRoutingModule } from './app-routing.module'
 
 //MATERIAL
 import {MatFormFieldModule} from '@angular/material/form-field'
-import {MatDialogModule, MatInputModule, MatButtonModule} from '@angular/material'
+import {MatDialogModule, MatInputModule, MatButtonModule, MatToolbarModule,MatSidenavModule} from '@angular/material'
 
 //SERVICES
 import { AuthService } from './services/auth.service';
@@ -30,13 +33,16 @@ import { AuthService } from './services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ToastrModule } from 'ngx-toastr';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component'
-import { AuthGuardService } from './services/auth-guard.service'
+import { AuthGuardService } from './services/auth-guard.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
-  {path: '', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'forgot-password', component: ForgotPasswordComponent}
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: '', component:MainComponent}
 ]
 
 @NgModule({
@@ -46,6 +52,9 @@ const appRoutes: Routes = [
     RegisterComponent,
     HomeComponent,
     ForgotPasswordComponent,
+    AddFolderComponent,
+    ProfileComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,8 +69,13 @@ const appRoutes: Routes = [
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatDialogModule,
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatSidenavModule
   ],
+  entryComponents: [AddFolderComponent, ProfileComponent],
   providers: [AngularFirestore, AuthService],
   bootstrap: [AppComponent]
 })

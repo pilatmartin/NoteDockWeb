@@ -120,6 +120,7 @@
         }
     }
     .notes-panel{
+        position: relative;
         width: 350px;
         height: calc(100vh - 2px);
         background-color: rgb(247, 247, 247);
@@ -127,7 +128,19 @@
         border-color: rgb(221, 221, 221);
         border-style: solid;
 
+        .note-toolbar{
+            position: relative;
+            height: 50px;
+            width: 100%;
+            border-bottom: 1px solid rgb(221, 221, 221);
+
+            .add-note-btn{
+                margin: 5px;
+            }
+        }
+
         .note{
+            position: relative;
             height: 100px;
             width: 100%;
             border-bottom: 1px solid rgb(211, 211, 211);
@@ -142,22 +155,29 @@
                 margin: 0;
                 font-size: 20px;
                 font-weight: 500;
+                padding: 5px;
+                height: 20px;
             }
             .note-side-desc{
                 margin: 0;
                 font-size: 14px;
+                padding: 5px; 
+                height: 20px;
             }
             .note-side-date{
                 margin: 0;
                 font-size: 12px;
-                position: relative;
-                bottom: -40px;
-                text-align: end;
+                position: absolute;
+                bottom: 0px;
+                right: 5px;
                 margin: 0 5px;
+                height: 20px;
             }
         }
+
     }
     .content{
+        position: relative;
         height: 100vh;
         width: calc(100% - 350px - 350px);
         margin: auto;

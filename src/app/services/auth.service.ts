@@ -54,7 +54,7 @@ export class AuthService {
      sendVerificationMail(){
        return this.afAuth.auth.currentUser.sendEmailVerification()
         .then(()=>{
-          this.router.navigate(['verify-email'])
+          this.router.navigate(['login'])
         })
      }
 
@@ -63,7 +63,7 @@ export class AuthService {
         .then(()=>{
           this.toast.success('Email sent, check your inbox')
         }).catch((error)=>{
-          this.toast.error(error)
+          this.toast.error(error.message)
         })
      }
 
@@ -87,7 +87,30 @@ export class AuthService {
      logout(){
        return this.afAuth.auth.signOut().then(()=>{
          localStorage.removeItem('user')
-         this.router.navigate([''])//navigate to login page
+         this.router.navigate(['login'])//navigate to login page
        })
+     }
+
+     updateUser(displayName, email){
+      //this.userData.displayName = displayName
+      //this.userData.email = email
+
+      try {
+        this.updateData(email,displayName)
+        //this.hc.changeDisplayName(displayName)
+        this.toast.success("Changes will be updated shortly")
+      } catch (error) {}
+     }
+     
+     updateData(email, displayName?){
+       this.afAuth.auth.currentUser.updateProfile({
+         displayName: displayName
+       }).catch((error)=>{
+         this.toast.error(error.message)
+       })
+       this.afAuth.auth.currentUser.updateEmail(email)
+      .catch((error)=>{
+        this.toast.error(error.message)
+      })
      }
 }
