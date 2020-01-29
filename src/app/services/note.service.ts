@@ -16,7 +16,8 @@ export class NoteService {
   getNotes(currentFolder,user){
     if(currentFolder != null){
       let path: string = 'users/' + user + '/folders/' + currentFolder.id + '/notes'
-      return this.afs.collection(path).snapshotChanges()
+      //SELECT Notes ORDER BY updated
+      return this.afs.collection(path, ref => ref.orderBy('updated', 'desc')).snapshotChanges()
     }else{
       return null
     }

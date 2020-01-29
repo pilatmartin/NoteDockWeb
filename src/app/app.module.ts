@@ -11,6 +11,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AddFolderComponent } from './dialogs/add-folder/add-folder.component';
 import { ProfileComponent } from './dialogs/profile/profile.component';
 import { MainComponent } from './components/main/main.component'
+import { AddProfileImageComponent } from './dialogs/add-profile-image/add-profile-image.component'
+
 
 //FIREBASE
 import { AngularFireModule } from '@angular/fire'
@@ -24,25 +26,35 @@ import { AppRoutingModule } from './app-routing.module'
 
 //MATERIAL
 import {MatFormFieldModule} from '@angular/material/form-field'
-import {MatDialogModule, MatInputModule, MatButtonModule, MatToolbarModule,MatSidenavModule} from '@angular/material'
+import {
+  MatDialogModule, 
+  MatInputModule, 
+  MatButtonModule, 
+  MatToolbarModule,
+  MatSidenavModule,
+  MatProgressBarModule
+  } from '@angular/material'
 
 //SERVICES
-import { AuthService } from './services/auth.service';
+import { AuthService } from './services/auth.service'
 
 //OTHER
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ToastrModule } from 'ngx-toastr';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component'
-import { AuthGuardService } from './services/auth-guard.service';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { AuthGuardService } from './services/auth-guard.service'
+import { FlexLayoutModule } from '@angular/flex-layout'
+import { DeviceDetectorModule } from 'ngx-device-detector'
+import {ImageCropperModule} from 'ngx-image-cropper'
 
-
+//page routes array
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
-  {path: '', component:MainComponent}
+  {path: '', component: MainComponent},
+  {path: 'image-crop', component:AddProfileImageComponent}
 ]
 
 @NgModule({
@@ -55,6 +67,7 @@ const appRoutes: Routes = [
     AddFolderComponent,
     ProfileComponent,
     MainComponent,
+    AddProfileImageComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +86,10 @@ const appRoutes: Routes = [
     MatDialogModule,
     FlexLayoutModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatProgressBarModule,
+    DeviceDetectorModule.forRoot(),
+    ImageCropperModule
   ],
   entryComponents: [AddFolderComponent, ProfileComponent],
   providers: [AngularFirestore, AuthService],

@@ -1,5 +1,6 @@
+
   <div class="container">
-    <div class="login-box">
+    <div class="login-box mat-elevation-z24" >
         <div class="header">
 
             <div class="header-content">
@@ -19,7 +20,11 @@
                     <input matInput type="password" placeholder="Enter your password" #userPassword required>
                 </mat-form-field>
 
-                <button mat-raised-button color="primary" (click)='register(userEmail.value, userPassword.value)'>Register</button>
+                <mat-form-field>
+                    <input matInput type="password" placeholder="Confirm your password" #userPasswordConfirm required >
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" (click)='register(userEmail.value, userPassword.value, userPasswordConfirm.value)'>Register</button>
                 <br>
                 <button mat-raised-button color="warn" routerLink = "/login">Go to Login</button>
 

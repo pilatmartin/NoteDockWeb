@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   newFolder: string
   showNoteBtn: boolean = false
   showContent: boolean = false
+  showImgCrop: boolean = false
 
   constructor(
     public as: AuthService,
@@ -67,7 +68,7 @@ export class HomeComponent implements OnInit {
       this.folders = folders
     })
 
-    //registering listener
+    //registering listener (on note ID change)
     this.currentFolder.registerListener((val)=>{
     this.getNotes().subscribe((data)=>{
       let notes = data.map((value)=>{
@@ -131,11 +132,11 @@ export class HomeComponent implements OnInit {
     this.currentNote = note
     console.log(note.updated)
     //SETS TIMEOUT TO PREVENT ERROR
-    setTimeout(() => {
-      (<HTMLInputElement>document.getElementById('note-title')).value = note.title;
-      (<HTMLInputElement>document.getElementById('note-description')).value = note.description;
-    }
-    , 50)
+    // setTimeout(() => {
+    //   (<HTMLInputElement>document.getElementById('note-title')).value = note.title;
+    //   (<HTMLInputElement>document.getElementById('note-description')).value = note.description;
+    // }
+    // , 50)
       
   }
 
@@ -161,11 +162,16 @@ export class HomeComponent implements OnInit {
   openProfileDialog(){
     const dialogRef = this.dialog.open(ProfileComponent, {
       width: '350px',
-      data: {
-        //name: this.as.userData.name,
-
-      }
+      data: {displayName: this.user.displayName}
     })
+    dialogRef.afterClosed().subscribe(result=>{
+      this.user.displayName = result
+      console.log(this.user.displayName)
+    })
+  }
+
+  openImageCrop(){
+    this.showImgCrop = !this.showImgCrop
   }
 
 }

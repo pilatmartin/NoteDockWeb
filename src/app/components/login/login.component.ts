@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +9,12 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public as: AuthService) { }
+  constructor(public as: AuthService, public toast: ToastrService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   login(email,password){
-    this.as.login(email,password)
-  }
+      this.as.login(email,password)
+  }  
 
 }

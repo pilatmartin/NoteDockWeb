@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container-home">
 <div class="sidenav">
     <div class="user-info">
-        <div class="avatar"></div>
+        <div class="avatar" (click) = "openImageCrop()"></div>
         <div class="user-data">
             <h5 class="display-name"> {{user.displayName}}</h5>
             <h5 class="display-name"> {{user.email}} </h5>
@@ -52,14 +52,15 @@
 
 <div class="content" *ngIf="showContent">
         <mat-form-field style="width:100% !important">
-        <input matInput type="text" id="note-title" #noteTitle /><br>
+        <input matInput value={{currentNote.title}} type="text" id="note-title" #noteTitle /><br>
     </mat-form-field>
     <mat-form-field style="width:100% !important; height: 80vh !important;">
-        <textarea matInput id="note-description" #noteDescription></textarea>
+        <textarea matInput value={{currentNote.description}} id="note-description" #noteDescription></textarea>
     </mat-form-field>
         <button mat-raised-button color="primary" class="delete-note-btn" (click) = "updateNote(noteTitle.value, noteDescription.value)"  >UPDATE</button>
         <button mat-raised-button color="warn" class="update-note-btn" (click) = "deleteNote()" >DELETE</button>
 </div>
 
+<app-add-profile-image  src="../../../assets/images/profile-img.png" *ngIf="showImgCrop"></app-add-profile-image>
 
 </div>

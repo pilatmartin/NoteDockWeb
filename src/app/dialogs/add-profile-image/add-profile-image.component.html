@@ -1,0 +1,26 @@
+<div mat-dialog-content class="container-img" >
+  <div>
+      <div class="">
+          <input type="file" (change)="fileChangeEvent($event)" />
+      </div>
+  </div>
+  <div class="img-crop-container" >
+      <div class="img-crop">
+          <h5>Crop Image</h5>
+          <image-cropper 
+          [imageChangedEvent]="imageChangedEvent" 
+          [maintainAspectRatio]="true" 
+          [aspectRatio]="4 / 4"
+          [resizeToWidth]="256" 
+          format="png" 
+          (imageCropped)="imageCropped($event)" 
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()" 
+          (loadImageFailed)="loadImageFailed()"></image-cropper>
+      </div>
+      <div class="img-preview">
+          <h5>Preview</h5>
+          <img [src]="croppedImage" />
+      </div>
+  </div>
+</div>

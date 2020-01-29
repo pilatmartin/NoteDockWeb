@@ -13,8 +13,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  register(email,password){
-    this.as.register(email,password)
+  register(email,password, passwordConfirm){
+      this.as.register(email,password, passwordConfirm)
   }
 
 }
