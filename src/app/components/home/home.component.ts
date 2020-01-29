@@ -129,15 +129,7 @@ export class HomeComponent implements OnInit {
 
   showNoteData(note){
     this.showContent = true
-    this.currentNote = note
-    console.log(note.updated)
-    //SETS TIMEOUT TO PREVENT ERROR
-    // setTimeout(() => {
-    //   (<HTMLInputElement>document.getElementById('note-title')).value = note.title;
-    //   (<HTMLInputElement>document.getElementById('note-description')).value = note.description;
-    // }
-    // , 50)
-      
+    this.currentNote = note      
   }
 
   changeDisplayName(name){
@@ -165,7 +157,7 @@ export class HomeComponent implements OnInit {
       data: {displayName: this.user.displayName}
     })
     dialogRef.afterClosed().subscribe(result=>{
-      this.user.displayName = result
+      this.user.displayName = result.displayName
       console.log(this.user.displayName)
     })
   }

@@ -29,6 +29,6 @@ export class ProfileComponent implements OnInit {
 
   updateUser(displayName, email){
     this.as.updateUser(displayName, email)
-    this.dialogRef.close()
+    this.dialogRef.close({displayName: displayName, email: email})
   }
 }
