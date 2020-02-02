@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -8,8 +9,9 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 export class MainComponent implements OnInit {
   deviceInfo = null
-  constructor(public deviceService: DeviceDetectorService) { 
+  constructor(public deviceService: DeviceDetectorService, public router: Router) { 
     this.showDevice()
+    this.router.navigate(['home'])
   }
 
   ngOnInit() {

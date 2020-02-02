@@ -1,15 +1,7 @@
 
   <div class="container">
     <div class="login-box mat-elevation-z24" >
-        <div class="header">
-
-            <div class="header-content">
-                <div class="logo"> <img src="/assets/images/logo96.png" alt="NoteDock logo" height="96" width="96"></div>
-                <h1>NoteDock</h1>
-                <h4>Welcome!</h4>
-            </div>
-        </div>
-
+            <img src="../../../assets/images/logo.png" alt="NoteDock logo">
         <div class="form">
             <div class="form-fields" >
                 <mat-form-field>
@@ -24,10 +16,9 @@
                     <input matInput type="password" placeholder="Confirm your password" #userPasswordConfirm required >
                 </mat-form-field>
 
-                <button mat-raised-button color="primary" (click)='register(userEmail.value, userPassword.value, userPasswordConfirm.value)'>Register</button>
-                <br>
-                <button mat-raised-button color="warn" routerLink = "/login">Go to Login</button>
-
+                    <button mat-raised-button color="primary" (click)='register(userEmail.value, userPassword.value, userPasswordConfirm.value)'>Register</button>
+                    <br>
+                    <button mat-raised-button color="warn" routerLink = "/login">Go to Login</button>
 
 
 

@@ -45,7 +45,8 @@ export class NoteService {
     this.afs.doc(path).set({
       updated: firebase.firestore.Timestamp.now(),
       title: note.title,
-      description: note.description
+      description: note.description,
+      pinned: note.pinned
     })
     //on success
     .then(()=>{

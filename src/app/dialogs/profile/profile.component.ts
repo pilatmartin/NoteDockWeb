@@ -14,7 +14,7 @@ export interface profileData{
 export class ProfileComponent implements OnInit {
   userData: any
   constructor(
-    public dialogRef: MatDialogRef<ProfileComponent>,
+    public dialog: MatDialogRef<ProfileComponent>,
      @Inject(MAT_DIALOG_DATA) public data: profileData,
      public as: AuthService
   ) { }
@@ -24,11 +24,11 @@ export class ProfileComponent implements OnInit {
   }
 
   onNoClick(){
-    this.dialogRef.close()
+    this.dialog.close()
   }
 
   updateUser(displayName, email){
     this.as.updateUser(displayName, email)
-    this.dialogRef.close({displayName: displayName, email: email})
+    this.dialog.close({displayName: displayName, email: email})
   }
 }

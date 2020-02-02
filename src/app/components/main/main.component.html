@@ -1,29 +1,4 @@
 <div class="container-main">
-    <!-- <div class="menu">
-        <div class="menu-left"></div>
-        <div class="menu-right">
-            <button mat-flat-button color="primary">Sign Up</button>
-            <button mat-stroked-button color="primary">Sign In</button>
-        </div>
-    </div>
-    <div class="menu-heh"></div>
-    <div class="download-section">
-        <div class="download-left">
-
-        </div>
-        <div class="download-right">
-        </div> 
-         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="rgb(53,74,163)" fill-opacity="1" d="M0,32L34.3,69.3C68.6,107,137,181,206,224C274.3,267,343,277,411,277.3C480,277,549,267,617,245.3C685.7,224,754,192,823,154.7C891.4,117,960,75,1029,58.7C1097.1,43,1166,53,1234,96C1302.9,139,1371,213,1406,250.7L1440,288L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z" data-darkreader-inline-fill="" style="--darkreader-inline-fill:#007acc;"></path>
-          </svg>
-          <div class="download-content"></div>
-    </div>
-    <div class="section"></div>
-    <div class="section"></div>
-    <div class="section"></div>
-    <div class="section"></div>
-    <div class="footer"></div> -->
-
     <div class="menu-container" style="height: 100vh;">
             <mat-toolbar color="primary" class="menu">
                     <img src="../../../assets/images/logo96.png" height="20px" width="20px" alt="Logo">
@@ -33,8 +8,8 @@
           
               <div fxShow="true" fxHide.lt-md="true" class="menu-items-lg">
                 <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-                <a href="#" mat-button>Home</a>
-                <a href="#" mat-button>Something</a>
+                <a routerLink="/" mat-button>Home</a>
+                <a routerLink="/login" mat-button>Login</a>
                 <a href="#" mat-button>Something</a>
               </div>
           
@@ -50,8 +25,8 @@
               <mat-sidenav #sidenav fxLayout="column" class="sidenav-container">
                 <div fxLayout="column">
                   <a (click)="sidenav.toggle()" href="#" mat-button>Close</a>
-                  <a href="#" mat-button>Menu Item 1</a>
-                  <a href="#" mat-button>Menu Item 2</a>
+                  <a routerLink="/" mat-button>Home</a>
+                  <a routerLink="/login" mat-button>Login</a>
                   <a href="#" mat-button>Menu Item 3</a>
                 </div>
               </mat-sidenav>

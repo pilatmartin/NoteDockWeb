@@ -21,7 +21,8 @@ import { ProfileComponent } from 'src/app/dialogs/profile/profile.component';
 
 export class HomeComponent implements OnInit {
   folders: Folder[] = null
-  notes: Note[] = null
+  notes: Note[] = []
+  pinnedNotes: Note[] = []
   user: any = JSON.parse(localStorage.getItem('user'))
   noteData: any
   currentFolder: any
@@ -77,11 +78,19 @@ export class HomeComponent implements OnInit {
           ...value.payload.doc.data()
         } as Note
       })
+      this.notes=[]
+      this.pinnedNotes = []
       notes.forEach((note)=>{
         note.updated = note.updated.toDate().toLocaleString()
+        console.log(note.pinned)
+        if(note.pinned==true){
+          this.pinnedNotes.push(note)
+        }else{
+          this.notes.push(note)
+        }
       })
-      this.notes = notes
     })
+    console.log(this.pinnedNotes)
        })
   }
 
@@ -108,12 +117,14 @@ export class HomeComponent implements OnInit {
     this.ns.deleteNote(this.currentFolder, this.user.uid,this.currentNote.uid)
   }
 
-  updateNote(title, desc){
+  updateNote(title, desc,pinned?){
+    console.log(pinned)
     let note = {
       id: this.currentNote.uid,
       updated: firebase.firestore.Timestamp.now(),
       title: title,
-      description: desc
+      description: desc,
+      pinned: pinned
     }
 
     this.ns.updateNote(this.currentFolder, this.user.uid, note)

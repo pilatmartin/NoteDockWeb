@@ -43,8 +43,16 @@
     <div class="note-toolbar">
         <button mat-button color="primary" class="add-note-btn" (click)="addNote()"  *ngIf = "showNoteBtn" ><i class="material-icons"> add </i> </button>
     </div>
+    <div class="note" tabindex="0" id="" (click)="showNoteData(note)" *ngFor = 'let note of pinnedNotes'>
+        <p class="note-side-title">{{note.title.length > 25 ? note.title.substring(0,25) + "..." : note.title}}</p>
+        <div class="note-side-pinned" ><i class="material-icons-round">star</i><i class="material-icons" style="display:none">star_border</i></div>
+        <p class="note-side-desc">{{note.description.length > 50 ? note.description.substring(0,50)+"..." : note.description}}</p>
+        <p class="note-side-date">{{note.updated}}</p>
+     </div>
+     <hr style="margin: 0; padding:0">
     <div class="note" tabindex="0" (click)="showNoteData(note)" *ngFor = 'let note of notes'>
         <p class="note-side-title">{{note.title.length > 25 ? note.title.substring(0,25) + "..." : note.title}}</p>
+        <div class="note-side-pinned"><i class="material-icons-round">star_border</i><i class="material-icons" style="display: none">star</i></div>
         <p class="note-side-desc">{{note.description.length > 50 ? note.description.substring(0,50)+"..." : note.description}}</p>
         <p class="note-side-date">{{note.updated}}</p>
      </div>
@@ -57,7 +65,7 @@
     <mat-form-field style="width:100% !important; height: 80vh !important;">
         <textarea matInput value={{currentNote.description}} id="note-description" #noteDescription></textarea>
     </mat-form-field>
-        <button mat-raised-button color="primary" class="delete-note-btn" (click) = "updateNote(noteTitle.value, noteDescription.value)"  >UPDATE</button>
+        <button mat-raised-button color="primary" class="delete-note-btn" (click) = "updateNote(noteTitle.value, noteDescription.value, currentNote.pinned)"  >UPDATE</button>
         <button mat-raised-button color="warn" class="update-note-btn" (click) = "deleteNote()" >DELETE</button>
 </div>
 

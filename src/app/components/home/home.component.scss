@@ -134,6 +134,14 @@
         border-width: 1px 1px 1px 0px;
         border-color: rgb(221, 221, 221);
         border-style: solid;
+        overflow: scroll;
+
+        //scroll bar disable
+        -ms-overflow-style: none;  //IE 
+        scrollbar-width: none;  //Firefox
+        &::-webkit-scrollbar { 
+            display: none;  //Safari + Chrome
+        }
 
         .note-toolbar{
             position: relative;
@@ -164,6 +172,22 @@
                 font-weight: 500;
                 padding: 5px;
                 height: 20px;
+                width: 300px;
+            }
+            .note-side-pinned{
+                position: absolute;
+                width: 40px;
+                top: 5px;
+                right: 5px;
+                cursor: pointer;
+                &:hover{
+                    #star{
+                        display: none;
+                    }
+                    #star-border{
+                        display: block !important;
+                    }
+                }
             }
             .note-side-desc{
                 margin: 0;
