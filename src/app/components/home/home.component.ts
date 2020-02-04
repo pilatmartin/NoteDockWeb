@@ -11,6 +11,7 @@ import { FolderService } from 'src/app/services/folder.service';
 import { NoteService } from 'src/app/services/note.service';
 import * as firebase from 'firebase/app';
 import { ProfileComponent } from 'src/app/dialogs/profile/profile.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -35,11 +36,14 @@ export class HomeComponent implements OnInit {
   constructor(
     public as: AuthService,
     public afs: AngularFirestore,
-    public afAuth: AngularFireAuth,
+    public afa: AngularFireAuth,
     public dialog: MatDialog,
     public fs: FolderService,
-    public ns: NoteService
+    public ns: NoteService,
+    public toast: ToastrService
     ) {
+
+      console.log(this.as.isLogged)
       //LISTENING TO VARIABLE CHANGES    
       this.currentFolder = {
       id: null,
@@ -58,6 +62,25 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    let path: string = 'users/' + this.user.uid + '/folders'
+    firebase.firestore().collection(path).onSnapshot({includeMetadataChanges: true},(snapshot)=>{
+      if (snapshot.docChanges().length<2) {    
+        snapshot.docChanges().forEach((change)=>{
+          if (change.type === 'added') {
+            this.toast.success('Folder has been added!')
+          }
+          else if (change.type === 'modified'){
+            this.toast.success('Folder has been modified!')
+          }
+          else if (change.type === 'removed') {
+            this.toast.success('Folder has been removed!')
+          }
+        })
+      }  
+    })
+
+
     //getting folders 
     this.getFolders().subscribe((data)=>{
       let folders = data.map((value)=>{
@@ -82,7 +105,6 @@ export class HomeComponent implements OnInit {
       this.pinnedNotes = []
       notes.forEach((note)=>{
         note.updated = note.updated.toDate().toLocaleString()
-        console.log(note.pinned)
         if(note.pinned==true){
           this.pinnedNotes.push(note)
         }else{
@@ -90,7 +112,6 @@ export class HomeComponent implements OnInit {
         }
       })
     })
-    console.log(this.pinnedNotes)
        })
   }
 
@@ -101,6 +122,11 @@ export class HomeComponent implements OnInit {
   addFolder(){
     let folder = { added: firebase.firestore.Timestamp.now(), name: this.newFolder, notesCount: 0}
     this.fs.addFolder(this.user.uid,folder)
+  }
+
+  deleteFolder(){
+    console.log('deleteFolder')
+    this.fs.deleteFolder(this.currentFolder.idcko, this.user.uid)
   }
 
   getNotes(){
@@ -115,6 +141,12 @@ export class HomeComponent implements OnInit {
   deleteNote(){
     console.log(this.currentFolder, this.user.uid,this.currentNote.uid)
     this.ns.deleteNote(this.currentFolder, this.user.uid,this.currentNote.uid)
+  }
+  pinNote(noteID){
+    this.ns.pinNote(noteID, this.user.uid,this.currentFolder)
+  }
+  unpinNote(noteID){
+    this.ns.unpinNote(noteID, this.user.uid,this.currentFolder)
   }
 
   updateNote(title, desc,pinned?){
@@ -168,13 +200,20 @@ export class HomeComponent implements OnInit {
       data: {displayName: this.user.displayName}
     })
     dialogRef.afterClosed().subscribe(result=>{
-      this.user.displayName = result.displayName
-      console.log(this.user.displayName)
+
+      if (result != undefined) {
+        this.user.displayName = result.displayName
+        console.log(this.user.displayName)
+      }
+      
     })
   }
 
   openImageCrop(){
     this.showImgCrop = !this.showImgCrop
   }
-
+  pinHover(divId: string, ihide: number, ishow:number):void{
+    (<HTMLElement>document.getElementById(divId).childNodes.item(ihide)).style.display = "none";
+    (<HTMLElement>document.getElementById(divId).childNodes.item(ishow)).style.display = "block";
+  }
 }

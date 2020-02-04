@@ -15,12 +15,17 @@
         <li class="link"> <i class="material-icons"> folder_open </i> 
             Folders 
         </li>
+        <div class="folders-container">
         <li class="folders link" id={{folder.uid}} tabindex="0" (click)="setCurrentFolderId(folder.uid)" *ngFor = 'let folder of folders'>
-                <svg height="30" width="30" style="vertical-align: middle !important; margin-top: -8px;">
+                <!-- <svg height="30" width="30" style="vertical-align: middle !important; margin-top: -8px;">
                         <line x1="10" y1="5" x2="10" y2="15" style="stroke:rgb(148, 148, 148);stroke-width:1" />
                           <line x1="10" y1="15" x2="20" y2="15" style="stroke:rgb(148, 148, 148);stroke-width:1" />
-                      </svg>
+                      </svg> -->
+                      <!-- <i class="material-icons">
+                        subdirectory_arrow_right
+                        </i> -->
             {{folder.name}}</li>
+            </div>
             <li class="divider"></li>
         <li class="link" (click)="openProfileDialog()"> <i class="material-icons"> account_box </i> 
             Account 
@@ -41,18 +46,32 @@
 
 <div class="notes-panel">
     <div class="note-toolbar">
-        <button mat-button color="primary" class="add-note-btn" (click)="addNote()"  *ngIf = "showNoteBtn" ><i class="material-icons"> add </i> </button>
+        <button mat-button color="primary" class="add-note-btn" (click)="addNote()"  *ngIf = "showNoteBtn" >
+            <i class="material-icons"> add </i> 
+        </button>
+        <button mat-button color="warn" class="delete-folder-btn" (click)="deleteFolder()"   *ngIf = "showNoteBtn" >
+            <i class="material-icons"> remove </i> 
+        </button>
     </div>
-    <div class="note" tabindex="0" id="" (click)="showNoteData(note)" *ngFor = 'let note of pinnedNotes'>
+    <!-- starts from 0  -->
+    <div class="note" tabindex="0" (click)="showNoteData(note)" *ngFor = 'let note of pinnedNotes; let i = index'>
         <p class="note-side-title">{{note.title.length > 25 ? note.title.substring(0,25) + "..." : note.title}}</p>
-        <div class="note-side-pinned" ><i class="material-icons-round">star</i><i class="material-icons" style="display:none">star_border</i></div>
+        <div class="note-side-pinned" id={{(i*(-1)).toString()}} (mouseenter)="pinHover((i*(-1)).toString(),0,1)" (mouseleave)="pinHover((i*(-1)).toString(),1,0)" (click)="unpinNote(note.uid)">
+            <i class="material-icons-round" id="star">star</i>
+            <i class="material-icons-round" id="star-border" style="display:none">star_border</i>
+        </div>
         <p class="note-side-desc">{{note.description.length > 50 ? note.description.substring(0,50)+"..." : note.description}}</p>
         <p class="note-side-date">{{note.updated}}</p>
      </div>
+
      <hr style="margin: 0; padding:0">
-    <div class="note" tabindex="0" (click)="showNoteData(note)" *ngFor = 'let note of notes'>
+     <!-- starts from 1 -->
+    <div class="note" tabindex="0" (click)="showNoteData(note)" *ngFor = 'let note of notes; let i = index'>
         <p class="note-side-title">{{note.title.length > 25 ? note.title.substring(0,25) + "..." : note.title}}</p>
-        <div class="note-side-pinned"><i class="material-icons-round">star_border</i><i class="material-icons" style="display: none">star</i></div>
+        <div class="note-side-pinned" id={{(i+1).toString()}} (mouseenter)="pinHover((i+1).toString(),0,1)" (mouseleave)="pinHover((i+1).toString(),1,0)" (click)="pinNote(note.uid)">
+            <i class="material-icons-round">star_border</i>
+            <i class="material-icons-round" style="display: none">star</i>
+        </div>
         <p class="note-side-desc">{{note.description.length > 50 ? note.description.substring(0,50)+"..." : note.description}}</p>
         <p class="note-side-date">{{note.updated}}</p>
      </div>

@@ -60,15 +60,27 @@ export class NoteService {
 
   deleteNote(currentFolder, user, noteID){
     let path: string = 'users/' + user + '/folders/' + currentFolder.idcko + '/notes/' + noteID
-    console.log(currentFolder.idcko)
+    
     this.afs.doc(path).delete()
-    //on success
     .then(()=>{
       this.toast.success('Note has been succesfully deleted!')
     })
-    //on error
     .catch((error)=>{
       this.toast.error(error.message)
+    })
+  }
+  pinNote(noteID, userID, currentFolder){
+    let path: string = 'users/' + userID + '/folders/' + currentFolder.idcko + '/notes/' + noteID
+    this.afs.doc(path).update({
+      pinned: true
+    })
+  }
+  unpinNote(noteID, userID, currentFolder){
+    let path: string = 'users/' + userID + '/folders/' + currentFolder.idcko + '/notes/' + noteID
+    this.afs.doc(path).update({
+      pinned: false
+    }).catch((error)=>{
+      this.toast.error(error.message);
     })
   }
 

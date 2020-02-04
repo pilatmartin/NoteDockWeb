@@ -37,7 +37,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     outline: 8px solid rgb(34, 34, 34);
 
     img{
-        height: 120px;
+        height: 80px;
         width: auto;
         z-index: 1;
     }
@@ -76,6 +76,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
                 }
                 .mat-form-field{
                     outline: none;
+                }
+                ::ng-deep .mat-form-field {
+                    .mat-input-element {
+                        color: white;
+                    }
+                    .mat-form-field-label {
+                        color: white;
+                    }
+                    .mat-form-field-underline {
+                        background-color: transparent;
+                    }
+                    .mat-form-field-ripple {
+                        background-color: transparent;
+                    }
+                    .mat-form-field-required-marker {
+                        color: red;
+                    }
                 }
             }
             }

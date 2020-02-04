@@ -3,19 +3,37 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   userData: any
+  password: string
   constructor(
     public af: AngularFirestore,//firebase database
     public afa: AngularFireAuth,//firebase auth database
     public router: Router,//navigation
     public ngZone: NgZone,//performance - come back to angular zone
     public toast: ToastrService,//toasts
+    public dialog: MatDialog
   ) {
+    //setting cache size
+    firebase.firestore().settings({
+      cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED
+    });
+    //enable offline persistence
+    firebase.firestore().enablePersistence().catch((error)=> {
+      if (error.code == 'failed-precondition') {
+        this.toast.error("Offline functionality isn't possible on multiple tabs!")
+
+      } else if (error.code == 'unimplemented') {
+          this.toast.error("Your browser doesn't support offline functionality!")
+      }
+  });
+
       //storing data in local storage
       this.afa.authState.subscribe(user =>{
         if(user){
@@ -97,23 +115,40 @@ export class AuthService {
        })
      }
 
-     updateUser(displayName, email){
+     updateUser(displayName, email, password){
       try {
-        this.updateData(email,displayName)
-        this.toast.success("Changes will be updated shortly")
-      } catch (error) {}
+        this.updateData(email, password, displayName)
+      } catch (error) {
+        this.toast.error(error.message)
+      }
      }
 
      //update user data (displayName can be null)
-     updateData(email, displayName?){
+     updateData(email, password, displayName?){
+       console.log(email, password, displayName)
        this.afa.auth.currentUser.updateProfile({
          displayName: displayName
+       }).then(()=>{
+        this.toast.success("Changes will be updated shortly")
        }).catch((error)=>{
          this.toast.error(error.message)
        })
-       this.afa.auth.currentUser.updateEmail(email)
+       this.afa.auth.currentUser.updateEmail(email).then(()=>{
+        const credential = firebase.auth.EmailAuthProvider.credential(this.afa.auth.currentUser.email, password)
+        this.afa.auth.currentUser.reauthenticateWithCredential(credential)
+        localStorage.removeItem('user')
+       })
       .catch((error)=>{
         this.toast.error(error.message)
       })
+     }
+
+     deleteUser(){
+       this.afa.auth.currentUser.delete().then(()=>{
+         this.toast.success("User deleted")
+         this.logout()
+       }).catch((error)=>{
+        this.toast.error(error.message)
+       })
      }
 }

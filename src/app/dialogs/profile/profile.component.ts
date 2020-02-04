@@ -27,8 +27,11 @@ export class ProfileComponent implements OnInit {
     this.dialog.close()
   }
 
-  updateUser(displayName, email){
-    this.as.updateUser(displayName, email)
-    this.dialog.close({displayName: displayName, email: email})
+  updateUser(displayName, email,password){
+    this.as.updateUser(displayName, email, password)
+    if (password != null) {
+      this.dialog.close({displayName: displayName, email: email})   
+    }
+
   }
 }

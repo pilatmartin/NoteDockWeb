@@ -79,6 +79,21 @@
                 vertical-align: middle !important; 
                 color: rgb(190, 190, 190);
             }
+            .folders-container{
+                height: 400px;
+                overflow: scroll;
+                  //scroll bar disable
+                -ms-overflow-style: none;  //IE 
+                scrollbar-width: none;  //Firefox
+                &::-webkit-scrollbar { 
+                     display: none;  //Safari + Chrome
+                }
+                margin-left: -40px;
+                .link{
+                    margin-left: 0px !important;
+                    padding-left: 10px !important;
+                }
+            }
 
             .divider{
                 height: 1px;
@@ -180,14 +195,7 @@
                 top: 5px;
                 right: 5px;
                 cursor: pointer;
-                &:hover{
-                    #star{
-                        display: none;
-                    }
-                    #star-border{
-                        display: block !important;
-                    }
-                }
+
             }
             .note-side-desc{
                 margin: 0;

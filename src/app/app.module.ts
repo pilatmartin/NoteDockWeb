@@ -45,7 +45,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { AuthGuardService } from './services/auth-guard.service'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { DeviceDetectorModule } from 'ngx-device-detector'
-import {ImageCropperModule} from 'ngx-image-cropper'
+import {ImageCropperModule} from 'ngx-image-cropper';
 
 //page routes array
 const appRoutes: Routes = [
