@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   noteData: any
   currentFolder: any
   currentNote: any
-  newFolder: string
+  folderName: string
   showNoteBtn: boolean = false
   showContent: boolean = false
   showImgCrop: boolean = false
@@ -62,23 +62,49 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    let path: string = 'users/' + this.user.uid + '/folders'
-    firebase.firestore().collection(path).onSnapshot({includeMetadataChanges: true},(snapshot)=>{
-      if (snapshot.docChanges().length<2) {    
+    //offline notifications folders
+    let pathFolders: string = 'users/' + this.user.uid + '/folders'
+    firebase.firestore().collection(pathFolders).onSnapshot((snapshot)=>{
+      if (!(snapshot.docChanges().length>2)) {    
         snapshot.docChanges().forEach((change)=>{
-          if (change.type === 'added') {
-            this.toast.success('Folder has been added!')
-          }
-          else if (change.type === 'modified'){
-            this.toast.success('Folder has been modified!')
-          }
-          else if (change.type === 'removed') {
-            this.toast.success('Folder has been removed!')
+          switch (change.type) {
+            case 'added':
+              this.toast.success('Added')
+              break;
+            case 'modified':
+              this.toast.success('Modified')
+              break;
+            case 'removed':
+              this.toast.success('Removed')
+              break;
+            default:
+              break;
           }
         })
       }  
     })
+    //offline notifications notes
+    let pathNotes: string = 'users/' + this.user.uid + '/folders/' + this.currentFolder.idcko + '/notes'
+    firebase.firestore().collection(pathNotes).onSnapshot((snapshot)=>{
+      if(!(snapshot.docChanges().length>2)){
+        snapshot.docChanges().forEach((change) => {
+          switch (change.type) {
+            case 'added':
+              this.toast.success('Added')
+              break;
+            case 'modified': 
+              this.toast.success('Modified')
+              break;
+            case 'removed': 
+              this.toast.success('Removed')
+              break;
+            default:
+              break;
+          }
+        });
+      }
+    })
+
 
 
     //getting folders 
@@ -119,14 +145,17 @@ export class HomeComponent implements OnInit {
     return this.fs.getFolders(this.user.uid)
   }
 
-  addFolder(){
-    let folder = { added: firebase.firestore.Timestamp.now(), name: this.newFolder, notesCount: 0}
+  addFolder(folderName){
+    let folder = { added: firebase.firestore.Timestamp.now(), name: folderName, notesCount: 0}
     this.fs.addFolder(this.user.uid,folder)
   }
 
   deleteFolder(){
-    console.log('deleteFolder')
     this.fs.deleteFolder(this.currentFolder.idcko, this.user.uid)
+  }
+
+  updateFolder(folderName){
+    this.fs.updateFolder(folderName, this.user.uid, this.currentFolder.idcko)
   }
 
   getNotes(){
@@ -139,9 +168,11 @@ export class HomeComponent implements OnInit {
   }
   
   deleteNote(){
-    console.log(this.currentFolder, this.user.uid,this.currentNote.uid)
     this.ns.deleteNote(this.currentFolder, this.user.uid,this.currentNote.uid)
+    this.currentNote = {}
+    this.showContent = false
   }
+
   pinNote(noteID){
     this.ns.pinNote(noteID, this.user.uid,this.currentFolder)
   }
@@ -150,7 +181,6 @@ export class HomeComponent implements OnInit {
   }
 
   updateNote(title, desc,pinned?){
-    console.log(pinned)
     let note = {
       id: this.currentNote.uid,
       updated: firebase.firestore.Timestamp.now(),
@@ -179,16 +209,21 @@ export class HomeComponent implements OnInit {
     this.user.displayName = name
   }
 
-  openFolderDialog(){
+  openFolderDialog(action){
     const dialogRef = this.dialog.open(AddFolderComponent, {
       width: '250px',
-      data: {name: this.newFolder}
+      data: {name: ""}
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      this.newFolder = result
-      if(this.newFolder != null){
-        this.addFolder()
+      if(result != null){
+
+        if (action == 'create') {
+          this.addFolder(result)
+        }
+        else if(action == 'update'){
+          this.updateFolder(result)
+        }
       }
 
     })

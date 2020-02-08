@@ -32,7 +32,9 @@ import {
   MatButtonModule, 
   MatToolbarModule,
   MatSidenavModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatMenuModule,
+  MatIconModule
   } from '@angular/material'
 
 //SERVICES
@@ -89,7 +91,13 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatProgressBarModule,
     DeviceDetectorModule.forRoot(),
-    ImageCropperModule
+    ImageCropperModule,
+    MatMenuModule,
+    MatIconModule
+  ],
+  exports:[
+    MatIconModule,
+    MatMenuModule
   ],
   entryComponents: [AddFolderComponent, ProfileComponent],
   providers: [AngularFirestore, AuthService],

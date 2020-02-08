@@ -8,7 +8,7 @@
         </div>
     </div>
     <ul class="links">
-        <li class="link" id="new-folder-li" (click) = "openFolderDialog()"><i class="material-icons"> add </i> 
+        <li class="link" id="new-folder-li" (click) = "openFolderDialog('create')"><i class="material-icons"> add </i> 
             New Folder 
         </li>
         <li class="divider"></li>
@@ -23,8 +23,9 @@
                       </svg> -->
                       <!-- <i class="material-icons">
                         subdirectory_arrow_right
-                        </i> -->
-            {{folder.name}}</li>
+                    </i> -->
+                    {{folder.name.length > 25 ? folder.name.substring(0,20) + "..." : folder.name}} 
+                </li>
             </div>
             <li class="divider"></li>
         <li class="link" (click)="openProfileDialog()"> <i class="material-icons"> account_box </i> 
@@ -49,16 +50,27 @@
         <button mat-button color="primary" class="add-note-btn" (click)="addNote()"  *ngIf = "showNoteBtn" >
             <i class="material-icons"> add </i> 
         </button>
-        <button mat-button color="warn" class="delete-folder-btn" (click)="deleteFolder()"   *ngIf = "showNoteBtn" >
-            <i class="material-icons"> remove </i> 
-        </button>
+        
+        <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()" *ngIf = "showNoteBtn"> <mat-icon>menu</mat-icon>  </button>
+        <mat-menu #menu="matMenu" [overlapTrigger]="false"  >
+            <span (mouseleave)="menuTrigger.closeMenu()">
+                <button mat-menu-item (click)="deleteFolder()" >
+                    <mat-icon color="warn">delete</mat-icon>
+                    <span>Delete Folder</span>
+                  </button>
+                  <button mat-menu-item (click)="openFolderDialog('update')">
+                    <mat-icon color="primary">edit</mat-icon>
+                    <span>Edit Folder</span>
+                  </button>
+            </span>
+        </mat-menu>
     </div>
     <!-- starts from 0  -->
     <div class="note" tabindex="0" (click)="showNoteData(note)" *ngFor = 'let note of pinnedNotes; let i = index'>
         <p class="note-side-title">{{note.title.length > 25 ? note.title.substring(0,25) + "..." : note.title}}</p>
         <div class="note-side-pinned" id={{(i*(-1)).toString()}} (mouseenter)="pinHover((i*(-1)).toString(),0,1)" (mouseleave)="pinHover((i*(-1)).toString(),1,0)" (click)="unpinNote(note.uid)">
-            <i class="material-icons-round" id="star">star</i>
-            <i class="material-icons-round" id="star-border" style="display:none">star_border</i>
+            <i class="material-icons-round" id="star">bookmark</i>
+            <i class="material-icons-round" id="star-border" style="display:none">bookmark_border</i>
         </div>
         <p class="note-side-desc">{{note.description.length > 50 ? note.description.substring(0,50)+"..." : note.description}}</p>
         <p class="note-side-date">{{note.updated}}</p>
@@ -69,8 +81,8 @@
     <div class="note" tabindex="0" (click)="showNoteData(note)" *ngFor = 'let note of notes; let i = index'>
         <p class="note-side-title">{{note.title.length > 25 ? note.title.substring(0,25) + "..." : note.title}}</p>
         <div class="note-side-pinned" id={{(i+1).toString()}} (mouseenter)="pinHover((i+1).toString(),0,1)" (mouseleave)="pinHover((i+1).toString(),1,0)" (click)="pinNote(note.uid)">
-            <i class="material-icons-round">star_border</i>
-            <i class="material-icons-round" style="display: none">star</i>
+            <i class="material-icons-round">bookmark_border</i>
+            <i class="material-icons-round" style="display: none">bookmark</i>
         </div>
         <p class="note-side-desc">{{note.description.length > 50 ? note.description.substring(0,50)+"..." : note.description}}</p>
         <p class="note-side-date">{{note.updated}}</p>

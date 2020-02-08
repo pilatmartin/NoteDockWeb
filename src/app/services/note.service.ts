@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,15 @@ export class NoteService {
     public toast: ToastrService
      ) { }
 
-  getNotes(currentFolder,user){
+//      firebase.database().ref(".info/connected").on("value", (snapshot)=> {
+//       if (snapshot.val() === true) {
+//      this.toast.success('Note has been successfully updated!')
+//  } else {
+//    alert("not connected");
+//  }
+// });
+
+  getNotes(currentFolder,user): Observable<any>{
     if(currentFolder != null){
       let path: string = 'users/' + user + '/folders/' + currentFolder.id + '/notes'
       //SELECT Notes ORDER BY updated
@@ -23,7 +32,7 @@ export class NoteService {
     }
   }
 
-  addNote(currentFolder,user){
+  addNote(currentFolder,user): void{
     let path: string = 'users/' + user + '/folders/' + currentFolder.idcko + '/notes'
     let note = {
       updated: firebase.firestore.Timestamp.now(),
@@ -38,19 +47,18 @@ export class NoteService {
     })
   }
 
-  updateNote(currentFolder, user, note){
+  updateNote(currentFolder, user, note):void{
     let path: string = 'users/' + user + '/folders/' + currentFolder.idcko + '/notes/' + note.id
     console.log(note.updated)
     //updating note 
-    this.afs.doc(path).set({
+    this.afs.doc(path).update({
       updated: firebase.firestore.Timestamp.now(),
       title: note.title,
-      description: note.description,
-      pinned: note.pinned
+      description: note.description
     })
     //on success
     .then(()=>{
-      this.toast.success('Note has been successfully updated!')
+      //this.toast.success("Note has been succesfully updated!")
     })
     //on error
     .catch((error)=>{
@@ -58,24 +66,24 @@ export class NoteService {
     })
   }
 
-  deleteNote(currentFolder, user, noteID){
+  deleteNote(currentFolder, user, noteID):void{
     let path: string = 'users/' + user + '/folders/' + currentFolder.idcko + '/notes/' + noteID
     
     this.afs.doc(path).delete()
     .then(()=>{
-      this.toast.success('Note has been succesfully deleted!')
+      //this.toast.success('Note has been succesfully deleted!')
     })
     .catch((error)=>{
       this.toast.error(error.message)
     })
   }
-  pinNote(noteID, userID, currentFolder){
+  pinNote(noteID, userID, currentFolder):void{
     let path: string = 'users/' + userID + '/folders/' + currentFolder.idcko + '/notes/' + noteID
     this.afs.doc(path).update({
       pinned: true
     })
   }
-  unpinNote(noteID, userID, currentFolder){
+  unpinNote(noteID, userID, currentFolder):void{
     let path: string = 'users/' + userID + '/folders/' + currentFolder.idcko + '/notes/' + noteID
     this.afs.doc(path).update({
       pinned: false
