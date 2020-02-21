@@ -19,20 +19,25 @@ export class FolderService {
     return this.afs.collection(path,ref => ref.orderBy('added', 'desc')).snapshotChanges()
   }
 
-  addFolder(userID, folder): void{
+  addFolder(userID, folder):void{
     let path: string = 'users/' + userID + '/folders'
-    this.afs.collection(path).add(folder)
+    this.afs.collection(path).add(folder).catch((error)=>{
+      this.toast.error(error.message)
+    })
   }
 
-  deleteFolder(folderID, userID) :void{
+  deleteFolder(folderID, userID):void{
     let path: string = "users/"+userID+"/folders/"+folderID
-    console.log(path)
-    this.afs.doc(path).delete()
+    this.afs.doc(path).delete().catch((error)=>{
+      this.toast.error(error.message)
+    })
   }
 
   updateFolder(folderName, userID,folderID):void{
     let path: string = "users/"+userID+"/folders/"+folderID
-    this.afs.doc(path).update({name: folderName})
+    this.afs.doc(path).update({name: folderName}).catch((error)=>{
+      this.toast.error(error.message)
+    })
   }
 
 }

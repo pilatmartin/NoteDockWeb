@@ -43,7 +43,7 @@
     }
     .download-section{
         position: relative;
-        height: calc(100vh - 80px);
+        height: 100vh;
         background-image: url('../../../assets/images/icon-background.png');
         background-size: contain;
         background-color: rgb(53, 74, 163);
@@ -67,17 +67,17 @@
          }
 
         .download-left{
-            width: 40%;
+            width: 30%;
             padding-left: 50px;
-            border-left: 3px solid rgb(34, 34, 34);
-            border-bottom: 3px solid rgb(34, 34, 34);
+            //border-left: 3px solid rgb(34, 34, 34);
+            //border-bottom: 3px solid rgb(34, 34, 34);
             height: 60vh;
             display: flex;
             align-items: center;
             flex-direction: column;
             justify-content: space-between;
             h1{
-                font-size: 50px;
+                font-size: 80px;
                 color: white;
                 font-weight: 500;
             }
@@ -108,10 +108,19 @@
             
         }
         .download-right{
-            width: 40%;
+            width: 60%;
             height: 60vh;
-            border-top: 3px solid rgb(34, 34, 34);
-            border-right: 3px solid rgb(34, 34, 34);
+            //border-top: 3px solid rgb(34, 34, 34);
+            //border-right: 3px solid rgb(34, 34, 34);
+            display:table-cell; 
+            vertical-align:middle; 
+            text-align:center;
+
+
+            img{
+                width: 80%;
+                height: auto;
+            }
         }
     }
     .section{
@@ -126,3 +135,22 @@
             background-color: rgb(53, 74, 163);
         }
     }
+
+    @media screen and (max-width: 1100px){
+        .download-section{
+            flex-direction: column !important;
+            height: 140vh;
+        }
+        .download-right{
+            width: 100% !important;
+            border: none !important;
+            margin-bottom: 100px !important;
+        }
+        .download-left{
+            width: 100% !important;
+            border: none !important;
+            margin-top: 100px !important;
+        }
+    } 
+
+   

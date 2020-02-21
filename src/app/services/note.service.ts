@@ -14,14 +14,6 @@ export class NoteService {
     public toast: ToastrService
      ) { }
 
-//      firebase.database().ref(".info/connected").on("value", (snapshot)=> {
-//       if (snapshot.val() === true) {
-//      this.toast.success('Note has been successfully updated!')
-//  } else {
-//    alert("not connected");
-//  }
-// });
-
   getNotes(currentFolder,user): Observable<any>{
     if(currentFolder != null){
       let path: string = 'users/' + user + '/folders/' + currentFolder.id + '/notes'
@@ -32,7 +24,7 @@ export class NoteService {
     }
   }
 
-  addNote(currentFolder,user): void{
+  addNote(currentFolder,user){
     let path: string = 'users/' + user + '/folders/' + currentFolder.idcko + '/notes'
     let note = {
       updated: firebase.firestore.Timestamp.now(),
@@ -41,7 +33,9 @@ export class NoteService {
     }
 
     //adding note - on error display popup with error message
-    this.afs.collection(path).add(note)
+    this.afs.collection(path).add(note).then((doc)=>{
+      return doc.id
+    })
       .catch((error)=>{
         this.toast.error(error)
     })
@@ -81,6 +75,8 @@ export class NoteService {
     let path: string = 'users/' + userID + '/folders/' + currentFolder.idcko + '/notes/' + noteID
     this.afs.doc(path).update({
       pinned: true
+    }).catch((error)=>{
+      this.toast.error(error.message)
     })
   }
   unpinNote(noteID, userID, currentFolder):void{

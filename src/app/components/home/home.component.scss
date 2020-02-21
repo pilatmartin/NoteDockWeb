@@ -221,6 +221,18 @@
         height: 100vh;
         width: calc(100% - 350px - 350px);
         margin: auto;
+
+        .toolbar{
+            background-color: rgb(247, 247, 247);
+            height: 51px;
+            margin-left: -23px;
+            margin-right: -24px;
+            border-bottom: 1px solid rgb(221, 221, 221);
+            
+            button{
+                margin-top: 5px;
+            }
+        }
         input[type="text"]{
             font-size: 40px ;
             text-align: center ;

@@ -67,7 +67,7 @@ export class AuthService {
             this.setUserData(result.user)
             this.toast.success("Your account has been created!")
           }).catch((error)=>{
-            this.toast.error(error)
+            this.toast.error(error.message)
           })
       }else{
         this.toast.error("Passwords must match!")

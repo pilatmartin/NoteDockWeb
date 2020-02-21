@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   noteData: any
   currentFolder: any
   currentNote: any
+  newNote: string
   folderName: string
   showNoteBtn: boolean = false
   showContent: boolean = false
@@ -62,50 +63,27 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    //offline notifications folders
-    let pathFolders: string = 'users/' + this.user.uid + '/folders'
-    firebase.firestore().collection(pathFolders).onSnapshot((snapshot)=>{
-      if (!(snapshot.docChanges().length>2)) {    
-        snapshot.docChanges().forEach((change)=>{
-          switch (change.type) {
-            case 'added':
-              this.toast.success('Added')
-              break;
-            case 'modified':
-              this.toast.success('Modified')
-              break;
-            case 'removed':
-              this.toast.success('Removed')
-              break;
-            default:
-              break;
-          }
-        })
-      }  
-    })
-    //offline notifications notes
-    let pathNotes: string = 'users/' + this.user.uid + '/folders/' + this.currentFolder.idcko + '/notes'
-    firebase.firestore().collection(pathNotes).onSnapshot((snapshot)=>{
-      if(!(snapshot.docChanges().length>2)){
-        snapshot.docChanges().forEach((change) => {
-          switch (change.type) {
-            case 'added':
-              this.toast.success('Added')
-              break;
-            case 'modified': 
-              this.toast.success('Modified')
-              break;
-            case 'removed': 
-              this.toast.success('Removed')
-              break;
-            default:
-              break;
-          }
-        });
-      }
-    })
-
-
+    // //offline notifications folders
+    // let pathFolders: string = 'users/' + this.user.uid + '/folders'
+    // firebase.firestore().collection(pathFolders).onSnapshot((snapshot)=>{
+    //   if (!(snapshot.docChanges().length>2)) {    
+    //     snapshot.docChanges().forEach((change)=>{
+    //       switch (change.type) {
+    //         case 'added':
+    //           this.toast.success('Folder added')
+    //           break;
+    //         case 'modified':
+    //           this.toast.success('Folder modified')
+    //           break;
+    //         case 'removed':
+    //           this.toast.success('Folder removed')
+    //           break;
+    //         default:
+    //           break;
+    //       }
+    //     })
+    //   }  
+    // })
 
     //getting folders 
     this.getFolders().subscribe((data)=>{
@@ -139,6 +117,8 @@ export class HomeComponent implements OnInit {
       })
     })
        })
+
+
   }
 
   getFolders(){
@@ -194,6 +174,8 @@ export class HomeComponent implements OnInit {
 
   setCurrentFolderId(id){
     this.currentFolder.idcko = id
+    this.currentNote = null
+    this.showContent = false
   }
 
   logOut(){

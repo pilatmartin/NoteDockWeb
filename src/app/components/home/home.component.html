@@ -47,30 +47,31 @@
 
 <div class="notes-panel">
     <div class="note-toolbar">
+            <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="menuTrigger.openMenu()" *ngIf = "showNoteBtn"> <mat-icon>menu</mat-icon>  </button>
+            <mat-menu #menu="matMenu"  [overlapTrigger]="true" >
+                <span (onBlur)="menuTrigger.closeMenu()">
+                    <button mat-menu-item (click)="deleteFolder()" >
+                        <mat-icon color="warn">delete</mat-icon>
+                        <span>Delete Folder</span>
+                      </button>
+                      <button mat-menu-item (click)="openFolderDialog('update')">
+                        <mat-icon color="primary">edit</mat-icon>
+                        <span>Edit Folder</span>
+                      </button>
+                </span>
+            </mat-menu>
         <button mat-button color="primary" class="add-note-btn" (click)="addNote()"  *ngIf = "showNoteBtn" >
-            <i class="material-icons"> add </i> 
+            <i class="material-icons"> add </i> Add Note
         </button>
-        
-        <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()" *ngIf = "showNoteBtn"> <mat-icon>menu</mat-icon>  </button>
-        <mat-menu #menu="matMenu" [overlapTrigger]="false"  >
-            <span (mouseleave)="menuTrigger.closeMenu()">
-                <button mat-menu-item (click)="deleteFolder()" >
-                    <mat-icon color="warn">delete</mat-icon>
-                    <span>Delete Folder</span>
-                  </button>
-                  <button mat-menu-item (click)="openFolderDialog('update')">
-                    <mat-icon color="primary">edit</mat-icon>
-                    <span>Edit Folder</span>
-                  </button>
-            </span>
-        </mat-menu>
     </div>
     <!-- starts from 0  -->
     <div class="note" tabindex="0" (click)="showNoteData(note)" *ngFor = 'let note of pinnedNotes; let i = index'>
         <p class="note-side-title">{{note.title.length > 25 ? note.title.substring(0,25) + "..." : note.title}}</p>
         <div class="note-side-pinned" id={{(i*(-1)).toString()}} (mouseenter)="pinHover((i*(-1)).toString(),0,1)" (mouseleave)="pinHover((i*(-1)).toString(),1,0)" (click)="unpinNote(note.uid)">
-            <i class="material-icons-round" id="star">bookmark</i>
-            <i class="material-icons-round" id="star-border" style="display:none">bookmark_border</i>
+            <!-- <i class="material-icons-round" id="star" color="primary">bookmark</i>
+            <i class="material-icons-round" id="star-border" style="display:none" color="primary">bookmark_border</i> -->
+            <mat-icon id="star" color="primary">bookmark</mat-icon>
+            <mat-icon id="star-border" color="warn" style="display: none">bookmark_border</mat-icon>
         </div>
         <p class="note-side-desc">{{note.description.length > 50 ? note.description.substring(0,50)+"..." : note.description}}</p>
         <p class="note-side-date">{{note.updated}}</p>
@@ -81,8 +82,8 @@
     <div class="note" tabindex="0" (click)="showNoteData(note)" *ngFor = 'let note of notes; let i = index'>
         <p class="note-side-title">{{note.title.length > 25 ? note.title.substring(0,25) + "..." : note.title}}</p>
         <div class="note-side-pinned" id={{(i+1).toString()}} (mouseenter)="pinHover((i+1).toString(),0,1)" (mouseleave)="pinHover((i+1).toString(),1,0)" (click)="pinNote(note.uid)">
-            <i class="material-icons-round">bookmark_border</i>
-            <i class="material-icons-round" style="display: none">bookmark</i>
+            <mat-icon color="primary">bookmark_border</mat-icon> 
+            <mat-icon color="primary" style="display:none">bookmark</mat-icon>
         </div>
         <p class="note-side-desc">{{note.description.length > 50 ? note.description.substring(0,50)+"..." : note.description}}</p>
         <p class="note-side-date">{{note.updated}}</p>
@@ -90,14 +91,21 @@
 </div>
 
 <div class="content" *ngIf="showContent">
+    <div class="toolbar">
+            <button mat-button color="primary" class="delete-note-btn" (click) = "updateNote(noteTitle.value, noteDescription.value, currentNote.pinned)">
+                <i class="material-icons-round" color="primary">edit</i> Edit Note
+            </button>
+            <button mat-button color="warn" class="update-note-btn" (click) = "deleteNote()" >
+                <i class="material-icons-round" color="warn">delete</i> Delete Note
+            </button>
+    </div>
         <mat-form-field style="width:100% !important">
         <input matInput value={{currentNote.title}} type="text" id="note-title" #noteTitle /><br>
     </mat-form-field>
     <mat-form-field style="width:100% !important; height: 80vh !important;">
         <textarea matInput value={{currentNote.description}} id="note-description" #noteDescription></textarea>
     </mat-form-field>
-        <button mat-raised-button color="primary" class="delete-note-btn" (click) = "updateNote(noteTitle.value, noteDescription.value, currentNote.pinned)"  >UPDATE</button>
-        <button mat-raised-button color="warn" class="update-note-btn" (click) = "deleteNote()" >DELETE</button>
+
 </div>
 
 <app-add-profile-image  src="../../../assets/images/profile-img.png" *ngIf="showImgCrop"></app-add-profile-image>
