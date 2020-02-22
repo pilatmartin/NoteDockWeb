@@ -115,32 +115,32 @@ export class AuthService {
        })
      }
 
-     updateUser(displayName, email, password){
+     updateUser(displayName){//, email, password
       try {
-        this.updateData(email, password, displayName)
+        this.updateData( displayName)//email, password,
       } catch (error) {
         this.toast.error(error.message)
       }
      }
 
      //update user data (displayName can be null)
-     updateData(email, password, displayName?){
+     updateData( displayName?){//email, password,
 
-      var user = firebase.auth().currentUser;
-      var credential = firebase.auth.EmailAuthProvider.credential(
-      firebase.auth().currentUser.email,
-      password
-      );
+      // var user = firebase.auth().currentUser;
+      // var credential = firebase.auth.EmailAuthProvider.credential(
+      // firebase.auth().currentUser.email,
+      // password
+      // );
 
       // Prompt the user to re-provide their sign-in credentials
 
-      user.reauthenticateAndRetrieveDataWithCredential(credential).then(()=> {
+      //user.reauthenticateAndRetrieveDataWithCredential(credential).then(()=> {
 
         this.afa.auth.currentUser.updateProfile({
           displayName: displayName
         }).then(()=>{
 
-         this.toast.success("Changes will be updated shortly")
+         this.toast.success("Profile has been updated!")
 
         }).catch((error)=>{
 
@@ -148,21 +148,21 @@ export class AuthService {
 
         })
 
-        this.afa.auth.currentUser.updateEmail(email).then(()=>{
+      //   this.afa.auth.currentUser.updateEmail(email).then(()=>{
 
-         const credential = firebase.auth.EmailAuthProvider.credential(this.afa.auth.currentUser.email, password)
+      //    const credential = firebase.auth.EmailAuthProvider.credential(this.afa.auth.currentUser.email, password)
 
-         this.afa.auth.currentUser.reauthenticateWithCredential(credential)
+      //    this.afa.auth.currentUser.reauthenticateWithCredential(credential)
          
-         localStorage.removeItem('user')
-        })
-       .catch((error)=>{
-         this.toast.error(error.message)
-       })
+      //    localStorage.removeItem('user')
+      //   })
+      //  .catch((error)=>{
+      //    this.toast.error(error.message)
+      //  })
 
-      }).catch((error)=> {
-        this.toast.error(error.message)
-      });
+      // }).catch((error)=> {
+      //   this.toast.error(error.message)
+      // });
 
 
      }

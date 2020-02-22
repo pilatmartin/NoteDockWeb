@@ -19,14 +19,14 @@
             <mat-hint>Member Since</mat-hint>
         </mat-form-field>
 
-        <mat-form-field>
+        <!-- <mat-form-field>
             <input matInput type="password" #confirmPassword required >
             <mat-hint>Password</mat-hint>
-        </mat-form-field>
+        </mat-form-field> -->
 
       </div>
       <div mat-dialog-actions>
-        <button mat-raised-button (click)="updateUser(displayName.value, emailAddress.value, confirmPassword.value)" [mat-dialog-close]="data.displayName"  color="warn">Update</button>
+        <button mat-raised-button (click)="updateUser(displayName.value)" [mat-dialog-close]="data.displayName"  color="warn">Update</button>
         <button mat-raised-button (click)="onNoClick()"  color="primary" cdkFocusInitial>Ok</button>
       </div>
       

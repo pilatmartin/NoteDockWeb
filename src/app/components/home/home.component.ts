@@ -109,7 +109,7 @@ export class HomeComponent implements OnInit {
       this.pinnedNotes = []
       notes.forEach((note)=>{
         note.updated = note.updated.toDate().toLocaleString()
-        if(note.pinned==true){
+        if(note.marked==true){
           this.pinnedNotes.push(note)
         }else{
           this.notes.push(note)
@@ -160,13 +160,13 @@ export class HomeComponent implements OnInit {
     this.ns.unpinNote(noteID, this.user.uid,this.currentFolder)
   }
 
-  updateNote(title, desc,pinned?){
+  updateNote(title, desc,marked?){
     let note = {
       id: this.currentNote.uid,
       updated: firebase.firestore.Timestamp.now(),
       title: title,
       description: desc,
-      pinned: pinned
+      marked: marked
     }
 
     this.ns.updateNote(this.currentFolder, this.user.uid, note)

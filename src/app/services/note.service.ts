@@ -29,7 +29,8 @@ export class NoteService {
     let note = {
       updated: firebase.firestore.Timestamp.now(),
       title: 'Untitled',
-      description: ''
+      description: '',
+      marked: false
     }
 
     //adding note - on error display popup with error message
@@ -74,7 +75,7 @@ export class NoteService {
   pinNote(noteID, userID, currentFolder):void{
     let path: string = 'users/' + userID + '/folders/' + currentFolder.idcko + '/notes/' + noteID
     this.afs.doc(path).update({
-      pinned: true
+      marked: true
     }).catch((error)=>{
       this.toast.error(error.message)
     })
@@ -82,7 +83,7 @@ export class NoteService {
   unpinNote(noteID, userID, currentFolder):void{
     let path: string = 'users/' + userID + '/folders/' + currentFolder.idcko + '/notes/' + noteID
     this.afs.doc(path).update({
-      pinned: false
+      marked: false
     }).catch((error)=>{
       this.toast.error(error.message);
     })

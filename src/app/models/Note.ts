@@ -3,5 +3,5 @@ export interface Note {
     noteTitle?: string
     noteDescription?: string
     updated?: any
-    pinned?: boolean
+    marked?: boolean
 }

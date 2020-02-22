@@ -94,7 +94,7 @@
 
 <div class="content" *ngIf="showContent">
         <div class="toolbar">
-                <button mat-button color="primary" class="delete-note-btn" (click) = "updateNote(noteTitle.value, noteDescription.value, currentNote.pinned)">
+                <button mat-button color="primary" class="delete-note-btn" (click) = "updateNote(noteTitle.value, noteDescription.value, currentNote.marked)">
                     <i class="material-icons-round" color="primary">done</i> Save Note
                 </button>
                 <button mat-button color="warn" class="update-note-btn" (click) = "deleteNote()">
