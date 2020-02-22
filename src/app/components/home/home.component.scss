@@ -80,7 +80,7 @@
                 color: rgb(190, 190, 190);
             }
             .folders-container{
-                height: 400px;
+                height: 300px;
                 overflow: scroll;
                   //scroll bar disable
                 -ms-overflow-style: none;  //IE 
@@ -164,9 +164,11 @@
             height: 50px;
             width: 100%;
             border-bottom: 1px solid rgb(221, 221, 221);
+            display: flex;
+            justify-content: space-between;
 
-            .add-note-btn{
-                margin: 5px;
+            .mat-menu-trigger{
+                height: 100%;
             }
         }
 
@@ -216,23 +218,24 @@
         }
 
     }
+
+
     .content{
-        position: relative;
         height: 100vh;
         width: calc(100% - 350px - 350px);
         margin: auto;
-
+        
         .toolbar{
             background-color: rgb(247, 247, 247);
             height: 51px;
             margin-left: -23px;
             margin-right: -24px;
             border-bottom: 1px solid rgb(221, 221, 221);
+            display: flex;
+            justify-content: space-between;
             
-            button{
-                margin-top: 5px;
-            }
         }
+
         input[type="text"]{
             font-size: 40px ;
             text-align: center ;

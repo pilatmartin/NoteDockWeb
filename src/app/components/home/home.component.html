@@ -35,7 +35,7 @@
            Logout 
         </li>
     </ul>
-    <div class="banner"> 
+    <div class="banner" style="display: none"> 
             <div class="logo">
                     <img src="../../../assets/images/logo96.png" alt="Logo" height=60px width="60px">
                     </div>
@@ -90,15 +90,17 @@
      </div>
 </div>
 
+
+
 <div class="content" *ngIf="showContent">
-    <div class="toolbar">
-            <button mat-button color="primary" class="delete-note-btn" (click) = "updateNote(noteTitle.value, noteDescription.value, currentNote.pinned)">
-                <i class="material-icons-round" color="primary">edit</i> Edit Note
-            </button>
-            <button mat-button color="warn" class="update-note-btn" (click) = "deleteNote()" >
-                <i class="material-icons-round" color="warn">delete</i> Delete Note
-            </button>
-    </div>
+        <div class="toolbar">
+                <button mat-button color="primary" class="delete-note-btn" (click) = "updateNote(noteTitle.value, noteDescription.value, currentNote.pinned)">
+                    <i class="material-icons-round" color="primary">done</i> Save Note
+                </button>
+                <button mat-button color="warn" class="update-note-btn" (click) = "deleteNote()">
+                    <i class="material-icons-round" color="warn">delete</i> Delete Note
+                </button>
+            </div>
         <mat-form-field style="width:100% !important">
         <input matInput value={{currentNote.title}} type="text" id="note-title" #noteTitle /><br>
     </mat-form-field>

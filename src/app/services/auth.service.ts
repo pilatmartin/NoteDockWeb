@@ -125,27 +125,50 @@ export class AuthService {
 
      //update user data (displayName can be null)
      updateData(email, password, displayName?){
-       console.log(email, password, displayName)
-       this.afa.auth.currentUser.updateProfile({
-         displayName: displayName
-       }).then(()=>{
-        this.toast.success("Changes will be updated shortly")
-       }).catch((error)=>{
+
+      var user = firebase.auth().currentUser;
+      var credential = firebase.auth.EmailAuthProvider.credential(
+      firebase.auth().currentUser.email,
+      password
+      );
+
+      // Prompt the user to re-provide their sign-in credentials
+
+      user.reauthenticateAndRetrieveDataWithCredential(credential).then(()=> {
+
+        this.afa.auth.currentUser.updateProfile({
+          displayName: displayName
+        }).then(()=>{
+
+         this.toast.success("Changes will be updated shortly")
+
+        }).catch((error)=>{
+
+          this.toast.error(error.message)
+
+        })
+
+        this.afa.auth.currentUser.updateEmail(email).then(()=>{
+
+         const credential = firebase.auth.EmailAuthProvider.credential(this.afa.auth.currentUser.email, password)
+
+         this.afa.auth.currentUser.reauthenticateWithCredential(credential)
+         
+         localStorage.removeItem('user')
+        })
+       .catch((error)=>{
          this.toast.error(error.message)
        })
-       this.afa.auth.currentUser.updateEmail(email).then(()=>{
-        const credential = firebase.auth.EmailAuthProvider.credential(this.afa.auth.currentUser.email, password)
-        this.afa.auth.currentUser.reauthenticateWithCredential(credential)
-        localStorage.removeItem('user')
-       })
-      .catch((error)=>{
+
+      }).catch((error)=> {
         this.toast.error(error.message)
-      })
+      });
+
+
      }
 
      deleteUser(){
        this.afa.auth.currentUser.delete().then(()=>{
-         this.toast.success("User deleted")
          this.logout()
        }).catch((error)=>{
         this.toast.error(error.message)

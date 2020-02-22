@@ -6,30 +6,35 @@ let window;
 
 function createWindow(){
     window = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1366,
+        height: 768,
+        
     })
 
     window.loadURL(
         url.format(
             {
-                pathname: path.join(__dirname, 'dist/index.html'),
+                pathname: path.join(__dirname, './dist/index.html'),
                 protocol: "file:",
                 slashes: true
             }
         )
     )
 
+    window.setMenu(null)
+
     window.on('closed', ()=>{
         win = null
     })
+    window.resizable = false
 }
+
 
 app.on('ready', createWindow)
 
 app.on('window-all-closed', ()=>{
 
-    if(process.platform !== 'darwin'){
+    if(process.platform !== 'darwin'){//check if macOS
         app.quit()
     }
 })

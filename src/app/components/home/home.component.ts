@@ -220,7 +220,6 @@ export class HomeComponent implements OnInit {
 
       if (result != undefined) {
         this.user.displayName = result.displayName
-        console.log(this.user.displayName)
       }
       
     })
