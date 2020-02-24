@@ -1,4 +1,4 @@
-<div mat-dialog-content>
+<div mat-dialog-content style="overflow: hidden">
     <h2> Profile</h2>
         <mat-form-field>
             <input matInput  [(ngModel)]="data.displayName"  maxlength="20" #displayName>
@@ -25,8 +25,8 @@
         </mat-form-field> -->
 
       </div>
-      <div mat-dialog-actions>
-        <button mat-raised-button (click)="updateUser(displayName.value)" [mat-dialog-close]="data.displayName"  color="warn">Update</button>
-        <button mat-raised-button (click)="onNoClick()"  color="primary" cdkFocusInitial>Ok</button>
+      <div mat-dialog-actions style="display: flex; justify-content: space-between">
+        <button mat-raised-button (click)="updateUser(displayName.value)" [mat-dialog-close]="data.displayName"  color="warn">Save</button>
+        <button mat-raised-button (click)="onNoClick()"  color="primary" cdkFocusInitial>Back</button>
       </div>
       

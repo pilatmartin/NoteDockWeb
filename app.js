@@ -14,7 +14,7 @@ function createWindow(){
     window.loadURL(
         url.format(
             {
-                pathname: path.join(__dirname, './dist/index.html'),
+                pathname: 'dist/index.html',
                 protocol: "file:",
                 slashes: true
             }

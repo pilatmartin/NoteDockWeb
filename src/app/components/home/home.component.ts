@@ -132,6 +132,8 @@ export class HomeComponent implements OnInit {
 
   deleteFolder(){
     this.fs.deleteFolder(this.currentFolder.idcko, this.user.uid)
+    this.currentFolder = null
+    this.showNoteBtn = false
   }
 
   updateFolder(folderName){
@@ -199,14 +201,18 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result != null){
-
-        if (action == 'create') {
-          this.addFolder(result)
-        }
-        else if(action == 'update'){
-          this.updateFolder(result)
-        }
+        let name = result.trim()
+        if(name.length>0){
+          if (action == 'create') {
+            this.addFolder(name)
+          }
+          else if(action == 'update'){
+            this.updateFolder(name)
+          }
+      }else{
+        this.toast.error("Invalid folder name!")
       }
+    }
 
     })
   }
@@ -226,7 +232,7 @@ export class HomeComponent implements OnInit {
   }
 
   openImageCrop(){
-    this.showImgCrop = !this.showImgCrop
+    this.toast.info("This feature is not available")
   }
   pinHover(divId: string, ihide: number, ishow:number):void{
     (<HTMLElement>document.getElementById(divId).childNodes.item(ihide)).style.display = "none";

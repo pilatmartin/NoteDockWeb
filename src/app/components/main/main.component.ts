@@ -17,6 +17,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.as.isLogged)
+    this.router.navigate(['login'])
   }
 
   showDevice(){
