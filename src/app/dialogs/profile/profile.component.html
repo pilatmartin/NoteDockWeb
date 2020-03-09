@@ -1,22 +1,22 @@
 <div mat-dialog-content style="overflow: hidden">
-    <h2> Profile</h2>
+    <h2> {{'updateProfile.profile' | translate}}</h2>
         <mat-form-field>
             <input matInput  [(ngModel)]="data.displayName"  maxlength="20" #displayName>
-            <mat-hint>Display Name</mat-hint>
+            <mat-hint>{{'updateProfile.displayName' | translate}}</mat-hint>
         </mat-form-field>
         <mat-form-field>
             <input matInput value={{userData.email}} #emailAddress disabled>
-            <mat-hint>Email address</mat-hint>
+            <mat-hint>{{'updateProfile.email' | translate}}</mat-hint>
         </mat-form-field>
 <br>
         <mat-form-field>
             <input matInput [(ngModel)]="userData.phoneNumber" placeholder="Not available" disabled>
-            <mat-hint>Phone Number</mat-hint>
+            <mat-hint>{{'updateProfile.phone' | translate}}</mat-hint>
         </mat-form-field>
 
         <mat-form-field>
             <input matInput [(ngModel)]='userData.metadata.creationTime' disabled >
-            <mat-hint>Member Since</mat-hint>
+            <mat-hint>{{'updateProfile.memberSince' | translate}}</mat-hint>
         </mat-form-field>
 
         <!-- <mat-form-field>
@@ -26,7 +26,7 @@
 
       </div>
       <div mat-dialog-actions style="display: flex; justify-content: space-between">
-        <button mat-raised-button (click)="updateUser(displayName.value)" [mat-dialog-close]="data.displayName"  color="warn">Save</button>
-        <button mat-raised-button (click)="onNoClick()"  color="primary" cdkFocusInitial>Back</button>
+        <button mat-raised-button (click)="updateUser(displayName.value)" [mat-dialog-close]="data.displayName"  color="warn">{{'updateProfile.save' | translate}}</button>
+        <button mat-raised-button (click)="onNoClick()"  color="primary" cdkFocusInitial>{{'updateProfile.back' | translate}}</button>
       </div>
       

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material';
 import * as firebase from 'firebase/app';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class AuthService {
     public router: Router,//navigation
     public ngZone: NgZone,//performance - come back to angular zone
     public toast: ToastrService,//toasts
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public translate: TranslateService
   ) {
     //setting cache size
     firebase.firestore().settings({
@@ -27,10 +29,10 @@ export class AuthService {
     //enable offline persistence
     firebase.firestore().enablePersistence().catch((error)=> {
       if (error.code == 'failed-precondition') {
-        this.toast.error("Offline functionality isn't possible on multiple tabs!")
+        this.toast.error(this.translate.instant('error.multipleTabs'))
 
       } else if (error.code == 'unimplemented') {
-          this.toast.error("Your browser doesn't support offline functionality!")
+          this.toast.error(this.translate.instant('error.unimplemented'))
       }
   });
 
@@ -57,7 +59,7 @@ export class AuthService {
           })
          this.setUserData(result.user)
         }).catch((error)=>{
-          this.toast.error(error.message)
+          this.toast.error(this.translate.instant('error.general'))
         })
      }
 
@@ -67,12 +69,12 @@ export class AuthService {
           .then((result)=>{
             this.verificateUser()
             this.setUserData(result.user)
-            this.toast.success("Your account has been created!")
+            this.toast.success(this.translate.instant('success.accountCreated'))
           }).catch((error)=>{
-            this.toast.error(error.message)
+            this.toast.error(this.translate.instant('error.general'))
           })
       }else{
-        this.toast.error("Passwords must match!")
+        this.toast.error(this.translate.instant('error.passwords'))
       }
      }
 
@@ -86,9 +88,9 @@ export class AuthService {
      forgotPassword(email){
        return this.afa.auth.sendPasswordResetEmail(email)
         .then(()=>{
-          this.toast.success('Email sent, check your inbox')
+          this.toast.success(this.translate.instant('success.emailSent'))
         }).catch((error)=>{
-          this.toast.error(error.message)
+          this.toast.error(this.translate.instant('error.general'))
         })
      }
 
@@ -121,7 +123,7 @@ export class AuthService {
       try {
         this.updateData( displayName)//email, password,
       } catch (error) {
-        this.toast.error(error.message)
+        this.toast.error(this.translate.instant('error.general'))
       }
      }
 
@@ -142,11 +144,11 @@ export class AuthService {
           displayName: displayName
         }).then(()=>{
 
-         this.toast.success("Profile has been updated!")
+         this.toast.success(this.translate.instant('success.profileUpdated'))
 
         }).catch((error)=>{
 
-          this.toast.error(error.message)
+          this.toast.error(this.translate.instant('error.general'))
 
         })
 
@@ -173,7 +175,7 @@ export class AuthService {
        this.afa.auth.currentUser.delete().then(()=>{
          this.logout()
        }).catch((error)=>{
-        this.toast.error(error.message)
+        this.toast.error(this.translate.instant('error.general'))
        })
      }
 }

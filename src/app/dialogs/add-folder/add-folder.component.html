@@ -5,6 +5,6 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button (click)="onNoClick()" color="warn">No Thanks</button>
-  <button mat-raised-button [mat-dialog-close]="data.name" color="primary" cdkFocusInitial>Ok</button>
+  <button mat-raised-button (click)="onNoClick()" color="warn">{{'addFolder.back' | translate}}</button>
+  <button mat-raised-button [mat-dialog-close]="data.name" color="primary" cdkFocusInitial>{{'updateProfile.confirm' | translate}}</button>
 </div>

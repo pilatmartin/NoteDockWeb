@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class NoteService {
 
   constructor(
     public afs: AngularFirestore,
-    public toast: ToastrService
+    public toast: ToastrService,
+    public translate: TranslateService
      ) { }
 
   getNotes(currentFolder,user): Observable<any>{
@@ -38,7 +40,7 @@ export class NoteService {
       return doc.id
     })
       .catch((error)=>{
-        this.toast.error(error)
+        this.toast.error(this.translate.instant('error.general'))
     })
   }
 
@@ -56,7 +58,7 @@ export class NoteService {
     })
     //on error
     .catch((error)=>{
-      this.toast.error(error.message)
+      this.toast.error(this.translate.instant('error.general'))
     })
   }
 
@@ -68,7 +70,7 @@ export class NoteService {
       //this.toast.success('Note has been succesfully deleted!')
     })
     .catch((error)=>{
-      this.toast.error(error.message)
+      this.toast.error(this.translate.instant('error.general'))
     })
   }
   pinNote(noteID, userID, currentFolder):void{
@@ -76,7 +78,7 @@ export class NoteService {
     this.afs.doc(path).update({
       marked: true
     }).catch((error)=>{
-      this.toast.error(error.message)
+      this.toast.error(this.translate.instant('error.general'))
     })
   }
   unpinNote(noteID, userID, currentFolder):void{
@@ -84,7 +86,7 @@ export class NoteService {
     this.afs.doc(path).update({
       marked: false
     }).catch((error)=>{
-      this.toast.error(error.message);
+      this.toast.error(this.translate.instant('error.general'));
     })
   }
 

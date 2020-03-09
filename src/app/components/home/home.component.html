@@ -8,12 +8,13 @@
         </div>
     </div>
     <ul class="links">
-        <li class="link" id="new-folder-li"  (click) = "openFolderDialog('create')" ><i class="material-icons"
-             [translate]="'home.newFolder'"> add </i> 
+        <li class="link" id="new-folder-li"  (click) = "openFolderDialog('create')" translate><i class="material-icons"
+             > add </i> 
+             {{'home.newFolder' | translate}}
         </li>
         <li class="divider"></li>
-        <li class="link"> <i class="material-icons"> folder_open </i> 
-            Folders 
+        <li class="link" translate> <i class="material-icons"> folder_open </i> 
+            {{'home.folders' | translate}}
         </li>
         <div class="folders-container">
         <li class="folders link" id={{folder.uid}} tabindex="0" (click)="setCurrentFolderId(folder.uid)" *ngFor = 'let folder of folders'>
@@ -28,11 +29,11 @@
                 </li>
             </div>
             <li class="divider"></li>
-        <li class="link" (click)="openProfileDialog()"> <i class="material-icons"> account_box </i> 
-            Account 
+        <li class="link" (click)="openProfileDialog()" translate> <i class="material-icons"> account_box </i> 
+            {{'home.account' | translate}} 
         </li>
-        <li class="link" (click)="logOut()"><i class="material-icons"> exit_to_app </i> 
-           Logout 
+        <li class="link" (click)="logOut()" translate><i class="material-icons"> exit_to_app </i> 
+           {{'home.logout' | translate}}
         </li>
     </ul>
     <div class="banner" style="display: none"> 
@@ -52,16 +53,16 @@
                 <span (onBlur)="menuTrigger.closeMenu()">
                     <button mat-menu-item (click)="deleteFolder()" >
                         <mat-icon color="warn">delete</mat-icon>
-                        <span>Delete Folder</span>
+                        <span translate> {{'home.deleteFolder' | translate }}</span>
                       </button>
                       <button mat-menu-item (click)="openFolderDialog('update')">
                         <mat-icon color="primary">edit</mat-icon>
-                        <span>Edit Folder</span>
+                        <span translate>{{'home.editFolder' | translate}}</span>
                       </button>
                 </span>
             </mat-menu>
-        <button mat-button color="primary" class="add-note-btn" (click)="addNote()"  *ngIf = "showNoteBtn" >
-            <i class="material-icons"> add </i> Add Note
+        <button mat-button color="primary" class="add-note-btn" (click)="addNote()"  *ngIf = "showNoteBtn" translate>
+            <i class="material-icons"> add </i> {{'home.addNote' | translate}} 
         </button>
     </div>
     <!-- starts from 0  -->
@@ -94,11 +95,11 @@
 
 <div class="content" *ngIf="showContent">
         <div class="toolbar">
-                <button mat-button color="primary" class="delete-note-btn" (click) = "updateNote(noteTitle.value, noteDescription.value, currentNote.marked)">
-                    <i class="material-icons-round" color="primary">done</i> Save Note
+                <button mat-button color="primary" class="delete-note-btn" (click) = "updateNote(noteTitle.value, noteDescription.value, currentNote.marked)" translate>
+                    <i class="material-icons-round" color="primary">done</i> {{'home.saveNote' | translate}}
                 </button>
                 <button mat-button color="warn" class="update-note-btn" (click) = "deleteNote()">
-                    <i class="material-icons-round" color="warn">delete</i> Delete Note
+                    <i class="material-icons-round" color="warn">delete</i> {{'home.deleteNote' | translate}}
                 </button>
             </div>
         <mat-form-field style="width:100% !important">

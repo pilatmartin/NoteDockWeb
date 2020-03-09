@@ -5,20 +5,20 @@
         <div class="form">
             <div class="form-fields" >
                 <mat-form-field>
-                    <input matInput placeholder="Enter your email" #userEmail required>
+                    <input matInput placeholder="{{'login.enterEmail' | translate}}" #userEmail required>
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input matInput type="password" placeholder="Enter your password" #userPassword required>
+                    <input matInput type="password" placeholder="{{'login.enterPassword' | translate}}" #userPassword required>
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input matInput type="password" placeholder="Confirm your password" #userPasswordConfirm required >
+                    <input matInput type="password" placeholder="{{'login.confirmPassword' | translate}}" #userPasswordConfirm required >
                 </mat-form-field>
 
-                    <button mat-raised-button color="primary" (click)='register(userEmail.value, userPassword.value, userPasswordConfirm.value)'>Register</button>
+                    <button mat-raised-button color="primary" (click)='register(userEmail.value, userPassword.value, userPasswordConfirm.value)'>{{'login.register' | translate}}</button>
                     <br>
-                    <button mat-raised-button color="warn" routerLink = "/login">Go to Login</button>
+                    <button mat-raised-button color="warn" routerLink = "/login">{{'login.goLogin' | translate}}</button>
 
 
 

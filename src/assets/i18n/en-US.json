@@ -1,0 +1,53 @@
+{
+    "home":{
+        "newFolder": "New Folder",
+        "deleteFolder": "Delete Folder",
+        "editFolder":"Edit Folder",
+        "addNote": "Add Note",
+        "saveNote":"Save Note",
+        "deleteNote":"Delete Note",
+        "folders": "Folders",
+        "account": "Account",
+        "logout": "Logout"
+    },
+    "login":{
+        "enterEmail": "Enter your email",
+        "enterPassword": "Enter your password",
+        "confirmPassword": "Confirm your password",
+        "login": "Login",
+        "register": "Register",
+        "goRegister": "Go to Register",
+        "goLogin": "Go to Login",
+        "forgotPass": "Forgot your password?",
+        "resetPass": "Reset Password"
+        
+    },
+    "addFolder":{
+        "back": "Back",
+        "confirm": "Confirm"
+    },
+    "updateProfile":{
+        "profile": "Profile",
+        "displayName": "Display Name",
+        "email":"Email Address",
+        "phone":"Phone Number",
+        "memberSince":"Member Since",
+        "save":"Save",
+        "back":"Back"
+    },
+    "error":{
+        "folderName": "Invalid folder name!",
+        "featureUnavailable": "This feature is unavailable!",
+        "multipleTabs": "Offline functionality isn't available on multiple tabs!",
+        "unimplemented": "Your browser doesn't support offline functionality!",
+        "passwords": "Passwords must match!",
+        "general": "Oh no! Error has occured!",
+        "emailEmpty": "You must enter a value",
+        "emailInvalid": "Not a valid email"
+    },
+    "success": {
+        "accountCreated": "Your account has been created!",
+        "emailSent": "Email sent, check your inbox!",
+        "profileUpdated": "Profile has been updated!"
+    }
+  }

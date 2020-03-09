@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
     public toast: ToastrService,
     public matMenuModule: MatMenuModule,
     public router: Router,
-    public translate: TranslateService
+    public translate: TranslateService,
     ) {
 
       if(!(this.as.isLogged)){
@@ -71,9 +71,12 @@ export class HomeComponent implements OnInit {
     } 
   }
 
-
+  
 
   ngOnInit() {
+
+    //########################### NOTHING TO SEE HERE #########################
+
     // //offline notifications folders
     // let pathFolders: string = 'users/' + this.user.uid + '/folders'
     // firebase.firestore().collection(pathFolders).onSnapshot((snapshot)=>{
@@ -225,7 +228,7 @@ export class HomeComponent implements OnInit {
             this.updateFolder(name)
           }
       }else{
-        this.toast.error("Invalid folder name!")
+        this.toast.error(this.translate.instant('error.general'))
       }
     }
 
@@ -247,7 +250,7 @@ export class HomeComponent implements OnInit {
   }
 
   openImageCrop(){
-    this.toast.info("This feature is not available")
+    this.toast.info(this.translate.instant('error.featureUnavailable'))
   }
   pinHover(divId: string, ihide: number, ishow:number):void{
     (<HTMLElement>document.getElementById(divId).childNodes.item(ihide)).style.display = "none";

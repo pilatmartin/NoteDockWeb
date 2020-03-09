@@ -1,0 +1,53 @@
+{
+    "home":{
+        "newFolder": "Nový Priečinok",
+        "deleteFolder": "Odstrániť Priečinok",
+        "editFolder":"Upraviť Priečinok",
+        "addNote": "Pridať Poznámku",
+        "saveNote":"Uložiť Poznámku",
+        "deleteNote":"Odstrániť Poznámku",
+        "folders": "Priečinky",
+        "account": "Profil",
+        "logout": "Odhlásiť"
+    },
+    "login":{
+        "enterEmail": "Zadajte email",
+        "enterPassword": "Zadajte heslo",
+        "confirmPassword": "Potvrďte heslo",
+        "login": "Prihlásiť",
+        "register": "Registrovať",
+        "goRegister": "Prejsť na Registráciu",
+        "goLogin": "Prejsť na prihlásenie",
+        "forgotPass": "Zabudli ste heslo?",
+        "resetPass": "Resetovať heslo"
+        
+    },
+    "addFolder":{
+        "back": "Späť",
+        "confirm": "Potvrdiť"
+    },
+    "updateProfile":{
+        "profile": "Profil",
+        "displayName": "Používateľské Meno",
+        "email":"Emailová Adresa",
+        "phone":"Telefónne Číslo",
+        "memberSince":"Dátum Registrácie",
+        "save":"Uložiť",
+        "back":"Späť"
+    },
+    "error":{
+        "folderName": "Neplatný názov!",
+        "featureUnavailable": "Táto služba nie je dostupná!",
+        "multipleTabs": "Offline funkcionalita nie je povolená na viacerých kartách!",
+        "unimplemented": "Váš prehliadač nepodporuje offline funkcionalitu!",
+        "passwords": "Heslá sa musia zhodovať!",
+        "general": "Ale nie! Nastala chyba!",
+        "emailEmpty": "Nezadali ste emailovú adresu!",
+        "emailInvalid": "Neplatná emailová adresa!"
+    },
+    "success": {
+        "accountCreated": "Váš účet bol vytvorený!",
+        "emailSent": "Email bol odoslaný na Vašu adresu!",
+        "profileUpdated": "Váš profil bol upravený!"
+    }
+  }
