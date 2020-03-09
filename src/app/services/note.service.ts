@@ -44,7 +44,6 @@ export class NoteService {
 
   updateNote(currentFolder, user, note):void{
     let path: string = 'users/' + user + '/folders/' + currentFolder.idcko + '/notes/' + note.id
-    console.log(note.updated)
     //updating note 
     this.afs.doc(path).update({
       updated: firebase.firestore.Timestamp.now(),

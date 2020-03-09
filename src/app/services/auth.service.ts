@@ -48,7 +48,9 @@ export class AuthService {
      }
 
      login(email,password){
-       return this.afa.auth.signInWithEmailAndPassword(email,password)
+       this.afa.auth.signInWithEmailAndPassword(email,password)
+       
+        return this.afa.auth.signInWithEmailAndPassword(email,password)
         .then((result)=>{
           this.ngZone.run(()=>{
             this.router.navigate(['home'])

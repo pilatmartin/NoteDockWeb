@@ -18,7 +18,7 @@ export class AuthGuardService {
         
         if(!(this.as.isLogged)){
 
-          this.router.navigate([''])
+          //this.router.navigate(['login'])
 
         }
         return true

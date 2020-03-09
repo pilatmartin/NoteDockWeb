@@ -19,6 +19,7 @@ import { AngularFireModule } from '@angular/fire'
 import { AngularFirestore } from '@angular/fire/firestore'
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { environment } from 'src/environments/environment'
+import { AngularFirestoreModule } from '@angular/fire/firestore'
 
 //ROUTING
 import {Routes, RouterModule} from '@angular/router'
@@ -34,7 +35,8 @@ import {
   MatSidenavModule,
   MatProgressBarModule,
   MatMenuModule,
-  MatIconModule
+  MatIconModule,
+  MatMenuTrigger
   } from '@angular/material'
 
 //SERVICES
@@ -47,7 +49,10 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { AuthGuardService } from './services/auth-guard.service'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { DeviceDetectorModule } from 'ngx-device-detector'
-import {ImageCropperModule} from 'ngx-image-cropper';
+import { ImageCropperModule } from 'ngx-image-cropper'
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { HttpClient, HttpClientModule } from '@angular/common/http'
 
 //page routes array
 const appRoutes: Routes = [
@@ -93,7 +98,16 @@ const appRoutes: Routes = [
     DeviceDetectorModule.forRoot(),
     ImageCropperModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    AngularFirestoreModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports:[
     MatIconModule,
@@ -104,3 +118,9 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient){
+  return new TranslateHttpLoader(http)
+}
+
+

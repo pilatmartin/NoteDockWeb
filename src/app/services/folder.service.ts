@@ -27,10 +27,10 @@ export class FolderService {
   }
 
   deleteFolder(folderID, userID):void{
-    let path: string = "users/"+userID+"/folders/"+folderID
-    this.afs.doc(path).delete().catch((error)=>{
-      this.toast.error(error.message)
-    })
+      let path: string = "users/"+userID+"/folders/"+folderID
+      this.afs.doc(path).delete().catch((error)=>{
+        this.toast.error(error.message)
+      })
   }
 
   updateFolder(folderName, userID,folderID):void{

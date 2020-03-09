@@ -5,13 +5,16 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Folder } from 'src/app/models/folder';
 import { Note } from 'src/app/models/note';
 import {ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatMenuTrigger, _MatMenuDirectivesModule, MatMenuModule } from '@angular/material';
 import { AddFolderComponent } from 'src/app/dialogs/add-folder/add-folder.component';
 import { FolderService } from 'src/app/services/folder.service';
 import { NoteService } from 'src/app/services/note.service';
 import * as firebase from 'firebase/app';
 import { ProfileComponent } from 'src/app/dialogs/profile/profile.component';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-home',
@@ -33,6 +36,7 @@ export class HomeComponent implements OnInit {
   showNoteBtn: boolean = false
   showContent: boolean = false
   showImgCrop: boolean = false
+  menuTrigger: MatMenuTrigger
 
   constructor(
     public as: AuthService,
@@ -41,10 +45,15 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog,
     public fs: FolderService,
     public ns: NoteService,
-    public toast: ToastrService
+    public toast: ToastrService,
+    public matMenuModule: MatMenuModule,
+    public router: Router,
+    public translate: TranslateService
     ) {
 
-      console.log(this.as.isLogged)
+      if(!(this.as.isLogged)){
+        this.router.navigate(['login'])
+      }
       //LISTENING TO VARIABLE CHANGES    
       this.currentFolder = {
       id: null,
@@ -61,6 +70,8 @@ export class HomeComponent implements OnInit {
       }
     } 
   }
+
+
 
   ngOnInit() {
     // //offline notifications folders
@@ -94,8 +105,8 @@ export class HomeComponent implements OnInit {
         } as Folder;
       })
       this.folders = folders
+      this.currentFolder.idcko = this.folders[0].uid
     })
-
     //registering listener (on note ID change)
     this.currentFolder.registerListener((val)=>{
     this.getNotes().subscribe((data)=>{
@@ -132,7 +143,10 @@ export class HomeComponent implements OnInit {
 
   deleteFolder(){
     this.fs.deleteFolder(this.currentFolder.idcko, this.user.uid)
-    this.currentFolder = null
+    setTimeout(()=>{
+      this.currentFolder.idcko = ""
+    },100)
+
     this.showNoteBtn = false
   }
 
@@ -178,6 +192,7 @@ export class HomeComponent implements OnInit {
     this.currentFolder.idcko = id
     this.currentNote = null
     this.showContent = false
+    this.showNoteBtn = true
   }
 
   logOut(){
