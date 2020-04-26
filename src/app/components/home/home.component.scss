@@ -16,19 +16,24 @@
             align-items: center;
             flex-direction: row;
 
-            .avatar{
-                margin: 20px;
-                height: 70px;
-                width: 70px;
-                background-color: rgb(53, 74, 163);
-                border-radius: 50%;
-                transition: 0.3s;
-                cursor: pointer;
-                
-                &:hover{
-                    opacity: 0.3;
-                }
+            .logo{
+                width: 90px;
+                height: auto;
+                padding: 10px;
             }
+            // .avatar{
+            //     margin: 20px;
+            //     height: 70px;
+                
+            //     background-color: rgb(53, 74, 163);
+            //     border-radius: 50%;
+            //     transition: 0.3s;
+            //     cursor: pointer;
+                
+            //     &:hover{
+            //         opacity: 0.3;
+            //     }
+            //}
 
             .display-name{
                 color: white;

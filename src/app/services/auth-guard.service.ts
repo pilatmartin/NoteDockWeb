@@ -20,7 +20,7 @@ export class AuthGuardService {
         this.deviceInfo = this.deviceService.getDeviceInfo()
         if(!(this.as.isLogged ) || this.deviceService.isMobile() || this.deviceService.isTablet()){
 
-          this.router.navigate(['login'])
+          this.router.navigate(['main'])
 
         }
         return true

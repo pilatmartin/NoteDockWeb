@@ -41,9 +41,19 @@
         "multipleTabs": "Offline funkcionalita nie je povolená na viacerých kartách!",
         "unimplemented": "Váš prehliadač nepodporuje offline funkcionalitu!",
         "passwords": "Heslá sa musia zhodovať!",
-        "general": "Ale nie! Nastala chyba!",
+        "default": "Ale nie! Nastala chyba!",
         "emailEmpty": "Nezadali ste emailovú adresu!",
-        "emailInvalid": "Neplatná emailová adresa!"
+        "auth/invalid-email": "Neplatná emailová adresa!",
+        "auth/cors-unsupported":  "Váš prehliadač nie je podporovaný.",
+        "auth/credential-already-in-use": "Prihlasovacie údaje sú už použité iným používateľom.",
+        "auth/email-already-in-use": "Táto emailová adresa nie je dostupná.",
+        "auth/wrong-password": "Zadané heslo je nesprávne.",
+        "auth/network-request-failed": "Skontrolujte Vaše pripojenie na internet.",
+        "auth/too-many-requests": "Robíte to príliž často.",
+        "auth/user-not-found": "Zlé prihlasovacie údaje",
+        "auth/user-disabled": "Toto používateľské konto bolo zablokované administrátorom.",
+        "auth/user-mismatch": "Údaje sa nezhodujú.",
+        "auth/weak-password": "Slabé heslo."
     },
     "success": {
         "accountCreated": "Váš účet bol vytvorený!",

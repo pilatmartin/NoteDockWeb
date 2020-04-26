@@ -1,7 +1,7 @@
 <div class="container-home">
 <div class="sidenav">
     <div class="user-info">
-        <div class="avatar" (click) = "openImageCrop()"></div>
+        <img src="../../../assets/images/logo.png" class="logo" alt="Logo">
         <div class="user-data">
             <h5 class="display-name"> {{user.displayName}}</h5>
             <h5 class="display-name"> {{user.email}} </h5>
@@ -36,7 +36,7 @@
            {{'home.logout' | translate}}
         </li>
     </ul>
-    <div class="banner" style="display: none"> 
+    <div class="banner" > 
             <div class="logo">
                     <img src="../../../assets/images/logo96.png" alt="Logo" height=60px width="60px">
                     </div>
@@ -65,12 +65,16 @@
             <i class="material-icons"> add </i> {{'home.addNote' | translate}} 
         </button>
     </div>
+    <!-- scuffed stuff -->
+
     <!-- starts from 0  -->
     <div class="note" tabindex="0" (click)="showNoteData(note)" *ngFor = 'let note of pinnedNotes; let i = index'>
         <p class="note-side-title">{{note.title.length > 25 ? note.title.substring(0,25) + "..." : note.title}}</p>
-        <div class="note-side-pinned" id={{(i*(-1)).toString()}} (mouseenter)="pinHover((i*(-1)).toString(),0,1)" (mouseleave)="pinHover((i*(-1)).toString(),1,0)" (click)="unpinNote(note.uid)">
-            <!-- <i class="material-icons-round" id="star" color="primary">bookmark</i>
-            <i class="material-icons-round" id="star-border" style="display:none" color="primary">bookmark_border</i> -->
+        <div class="note-side-pinned" 
+        id={{(i*(-1)).toString()}} 
+        (mouseenter)="pinHover((i*(-1)).toString(),0,1)" 
+        (mouseleave)="pinHover((i*(-1)).toString(),1,0)" 
+        (click)="unpinNote(note.uid)">
             <mat-icon id="star" color="primary">bookmark</mat-icon>
             <mat-icon id="star-border" color="warn" style="display: none">bookmark_border</mat-icon>
         </div>
@@ -82,13 +86,18 @@
      <!-- starts from 1 -->
     <div class="note" tabindex="0" (click)="showNoteData(note)" *ngFor = 'let note of notes; let i = index'>
         <p class="note-side-title">{{note.title.length > 25 ? note.title.substring(0,25) + "..." : note.title}}</p>
-        <div class="note-side-pinned" id={{(i+1).toString()}} (mouseenter)="pinHover((i+1).toString(),0,1)" (mouseleave)="pinHover((i+1).toString(),1,0)" (click)="pinNote(note.uid)">
+        <div class="note-side-pinned" 
+        id={{(i+1).toString()}} 
+        (mouseenter)="pinHover((i+1).toString(),0,1)" 
+        (mouseleave)="pinHover((i+1).toString(),1,0)" 
+        (click)="pinNote(note.uid)">
             <mat-icon color="primary">bookmark_border</mat-icon> 
             <mat-icon color="primary" style="display:none">bookmark</mat-icon>
         </div>
         <p class="note-side-desc">{{note.description.length > 50 ? note.description.substring(0,50)+"..." : note.description}}</p>
         <p class="note-side-date">{{note.updated}}</p>
      </div>
+     <!-- /scuffed stuff -->
 </div>
 
 
@@ -111,6 +120,6 @@
 
 </div>
 
-<app-add-profile-image  src="../../../assets/images/profile-img.png" *ngIf="showImgCrop"></app-add-profile-image>
+<!-- <app-add-profile-image  src="../../../assets/images/profile-img.png" *ngIf="showImgCrop"></app-add-profile-image> -->
 
 </div>

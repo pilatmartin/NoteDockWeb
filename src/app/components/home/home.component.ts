@@ -235,6 +235,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
+
   openProfileDialog(){
     const dialogRef = this.dialog.open(ProfileComponent, {
       width: '350px',
@@ -249,6 +250,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
+//hehe
   openImageCrop(){
     this.toast.info(this.translate.instant('error.featureUnavailable'))
   }

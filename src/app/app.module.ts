@@ -21,9 +21,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth'
 import { environment } from 'src/environments/environment'
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 
-//ROUTING
-import {Routes, RouterModule} from '@angular/router'
-import { AppRoutingModule } from './app-routing.module'
+
 
 //MATERIAL
 import {MatFormFieldModule} from '@angular/material/form-field'
@@ -53,6 +51,10 @@ import { ImageCropperModule } from 'ngx-image-cropper'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
+
+//ROUTING
+import {Routes, RouterModule} from '@angular/router'
+import { AppRoutingModule } from './app-routing.module'
 
 //page routes array
 const appRoutes: Routes = [

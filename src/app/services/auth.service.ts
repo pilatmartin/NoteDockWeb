@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material';
+import { MatDialog, ErrorStateMatcher } from '@angular/material';
 import * as firebase from 'firebase/app';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -50,7 +50,7 @@ export class AuthService {
      }
 
      login(email,password){
-       this.afa.auth.signInWithEmailAndPassword(email,password)
+       //this.afa.auth.signInWithEmailAndPassword(email,password)
        
         return this.afa.auth.signInWithEmailAndPassword(email,password)
         .then((result)=>{
@@ -59,7 +59,7 @@ export class AuthService {
           })
          this.setUserData(result.user)
         }).catch((error)=>{
-          this.toast.error(this.translate.instant('error.general'))
+          this.toast.error(this.translate.instant('error.'+error.code))
         })
      }
 
@@ -71,7 +71,7 @@ export class AuthService {
             this.setUserData(result.user)
             this.toast.success(this.translate.instant('success.accountCreated'))
           }).catch((error)=>{
-            this.toast.error(this.translate.instant('error.general'))
+            this.toast.error(this.translate.instant('error.'+error.code))
           })
       }else{
         this.toast.error(this.translate.instant('error.passwords'))
@@ -82,6 +82,7 @@ export class AuthService {
        return this.afa.auth.currentUser.sendEmailVerification()
         .then(()=>{
           this.router.navigate(['login'])
+          this.toast.info('pre prihlase')
         })
      }
 
@@ -90,7 +91,7 @@ export class AuthService {
         .then(()=>{
           this.toast.success(this.translate.instant('success.emailSent'))
         }).catch((error)=>{
-          this.toast.error(this.translate.instant('error.general'))
+          this.toast.error(this.translate.instant('error.'+error.code))
         })
      }
 
@@ -123,7 +124,7 @@ export class AuthService {
       try {
         this.updateData( displayName)//email, password,
       } catch (error) {
-        this.toast.error(this.translate.instant('error.general'))
+        this.toast.error(this.translate.instant('error.'+error.code))
       }
      }
 
@@ -148,7 +149,7 @@ export class AuthService {
 
         }).catch((error)=>{
 
-          this.toast.error(this.translate.instant('error.general'))
+          this.toast.error(this.translate.instant('error.'+error.code))
 
         })
 
@@ -175,7 +176,7 @@ export class AuthService {
        this.afa.auth.currentUser.delete().then(()=>{
          this.logout()
        }).catch((error)=>{
-        this.toast.error(this.translate.instant('error.general'))
+        this.toast.error(this.translate.instant('error.auth/'+error.code))
        })
      }
 }

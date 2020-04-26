@@ -8,9 +8,8 @@
           
               <div fxShow="true" fxHide.lt-md="true" class="menu-items-lg">
                 <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-                <a routerLink="/" mat-button>Home</a>
-                <a routerLink="/login" mat-button>Login</a>
-                <a href="#" mat-button>Something</a>
+                <a routerLink="/login" mat-button *ngIf="!isMobile">Login</a>
+                <a href="#contact" mat-button>Contact</a>
               </div>
           
               <div fxShow="true" fxHide.gt-sm="true">
@@ -23,29 +22,80 @@
           
             <mat-sidenav-container fxFlexFill >
               <mat-sidenav #sidenav fxLayout="column" class="sidenav-container">
-                <div fxLayout="column">
+                <div fxLayout="column" style="padding-top: 50px;">
                   <a (click)="sidenav.toggle()" href="#" mat-button>Close</a>
                   <a routerLink="/" mat-button>Home</a>
-                  <a routerLink="/login" mat-button>Login</a>
-                  <a href="#" mat-button>Menu Item 3</a>
+                  <a routerLink="/login"  *ngIf="!isMobile" mat-button>Login</a>
+                  <a routerLink="#contact" mat-button>Contact</a>
                 </div>
               </mat-sidenav>
               <mat-sidenav-content fxFlexFill>
                   <div class="download-section">
                     <div class="download-left">
                         <h1>One account </h1>
-                        <h1><span>all devices</span>. </h1>
-                        <p>Notes app available on every platform accessible anywhere and free of charge! Let's start with signing up: </p>
-                        <button mat-stroked-button routerLink="register"> Sign Up </button>
+                        <h1><span>All devices</span> </h1>
+                        <p>Notes app available on <span> iOS</span>, <span>Android</span>, <span>Windows</span>, <span>MacOS </span>and <span>Linux </span> accessible anywhere! <br> Let's start with signing up: </p>
+                        <button mat-raised-button routerLink="register"> Sign up </button>
                     </div>
-                    <div class="download-right">
-                      <img src="../../../assets/images/mockup.png" alt="mockup">
-                    </div>
+                    <!-- <div class="download-right">
+                      <img src="../../../assets/images/mockup.png" alt="mockup"> 
+                    </div> -->
                 </div>
-                <div class="section"></div>
-                <div class="section"></div>
-                <div class="section"></div>
-                <div class="section"></div>
+                <div class="section" >
+                  <div class="sub-section"> 
+                    <img src="../../../assets/images/Iphone-Mockup.png" alt="Iphone Mockup">
+                    <div class="sub-section-text">
+                    <h3>Organize anywhere you are!</h3>
+                    <p>We have easy to use mobile app!</p>
+                    <div class="sub-section-btns">
+                      <button mat-raised-button> <a href="https://play.google.com/store/apps/details?id=com.pixelart.notedock" target="_blank" style="text-decoration: none"> Google Play </a></button>
+                      <button mat-raised-button disabled> Appstore </button>
+                    </div>
+                  </div>
+                  </div>
+                  <!-- <div></div> -->
+                </div>
+                <div class="section" ></div>
+                <div class="section">
+                    <div class="sub-section">
+                        <img src="../../../assets/images/mockup.png"  alt="Mockup">
+                        <div class="sub-section-text" style="padding-left: 50px;">
+                          <h3>No need to wait!</h3>
+                          <p>We provide realtime synchronization!</p>
+                        </div>
+                      </div>
+                </div>
+                <div class="section" id="contact">
+                  <div class="sub-section" id="sub-section-questions" style="display: flex; justify-content:center; padding: 50px 0;">
+
+                  <div class="sub-section-form">
+                    <br>
+                  <mat-form-field appearance="fill" color="accent">
+                          <mat-label><b>Email</b></mat-label>
+                          <input matInput #email>
+                  </mat-form-field> 
+                  <mat-form-field appearance="fill" color="accent">
+                      <mat-label><b>Subject</b></mat-label>
+                      <input matInput #subject>
+                </mat-form-field> 
+                <br>
+                  <mat-form-field appearance="fill" color="accent" style="width: 408px ">
+                        <mat-label>Whats on your mind?</mat-label>
+                        <textarea matInput maxlength="100" #message></textarea>
+                      </mat-form-field>
+                      <br>
+                      <button mat-raised-button style="background-color: rgb(34, 34, 34); color: white;" (click)="onSubmit(email.value,subject.value,message.value)">Send</button>
+                    </div>
+                    <div class="sub-section-text" style="padding-left: 50px;">
+                        <h3 style="color: rgb(34, 34, 34)">Any questions?</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <footer>
+                    <img src="../../../assets/images/logo96.png" height="20px" width="20px" alt="Logo">
+                    <p style="padding-left: 15px">Martin Pilát 2020</p>
+                  </footer>
+                <!-- </div> -->
             </mat-sidenav-content>
             </mat-sidenav-container>
           </div>

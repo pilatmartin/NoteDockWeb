@@ -16,7 +16,9 @@
                     <input matInput type="password" placeholder="{{'login.confirmPassword' | translate}}" #userPasswordConfirm required >
                 </mat-form-field>
 
-                    <button mat-raised-button color="primary" (click)='register(userEmail.value, userPassword.value, userPasswordConfirm.value)'>{{'login.register' | translate}}</button>
+                    <button mat-raised-button color="primary" (click)='register(userEmail.value, userPassword.value, userPasswordConfirm.value)'>
+                        {{'login.register' | translate}}
+                    </button>
                     <br>
                     <button mat-raised-button color="warn" routerLink = "/login">{{'login.goLogin' | translate}}</button>
 
