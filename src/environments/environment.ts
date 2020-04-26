@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyD8ibsySulgZqmf0kRhqRxY1o5HCgA1aI4",
+    apiKey: "************************************",
     authDomain: "notedock.firebaseapp.com",
     databaseURL: "https://notedock.firebaseio.com",
     projectId: "notedock",

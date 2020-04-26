@@ -48,7 +48,7 @@ export class MainComponent implements OnInit {
       Email.send({
         Host: 'smtp.elasticemail.com',
         Username: '8pilatmartin8@gmail.com',
-        Password: 'D044C53E6FC14B7CE6AEBDE88D2D5EEA9A9D',
+        Password: '**********************************',
         To:'8pilatmartin8@gmail.com',
         From: '8pilatmartin8@gmail.com',
         Subject: subject,
